@@ -10,6 +10,8 @@ GS_Game::~GS_Game() {}
 void GS_Game::OnCreate() {
 	m_player = new Player(m_stateMgr->GetContext());
 	m_stateMgr->GetContext()->m_playerPos = &m_playerPos;
+
+	m_player->SetPosition({ 200, 200 });
 }
 
 void GS_Game::OnDestroy() {
@@ -33,5 +35,8 @@ void GS_Game::Update(float dt) {
 }
 
 void GS_Game::Draw() {
-
+	m_player->Draw();
+	m_stateMgr->GetContext()->m_enemyManager->Draw();
+	m_stateMgr->GetContext()->m_bulletManager->Draw();
+	m_stateMgr->GetContext()->m_effectManager->Draw();
 }

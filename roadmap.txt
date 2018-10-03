@@ -2,7 +2,7 @@ TODO
 
 IMPLEMENT GAME STATES
 
-move functionality from Game to GS_Game
+**move functionality from Game to GS_Game
 
 removing "intelligence" from enemy spawner, make it only create enemies when asked, move spawning logic to the game state itself
 

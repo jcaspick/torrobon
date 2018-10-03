@@ -1,12 +1,11 @@
 #pragma once
 #ifndef GAME
 #define GAME
-#include "Player.h"
-#include "Enemy.h"
 #include "SpriteSheet.h"
 #include "TextureHolder.h"
 #include "BulletManager.h"
 #include "EnemyManager.h"
+#include "StateManager.h"
 
 class Game {
 
@@ -23,12 +22,12 @@ private:
 	sf::Clock m_clock;
 	float m_dt;
 	Context m_context;
+	StateManager m_stateMgr;
 	sf::RenderWindow m_window;
 	TextureHolder m_textures;
 	BulletManager m_bulletManager;
 	EnemyManager m_enemyManager;
 	EffectManager m_effectManager;
-	Player* m_player;
 	sf::Vector2f m_playerPos;
 };
 

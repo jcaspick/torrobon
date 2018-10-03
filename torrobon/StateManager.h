@@ -32,7 +32,7 @@ private:
 
 	template<class T>
 	void RegisterState(const StateType& type) {
-		m_stateFactory[type] = [this]() -> BaseState*
+		m_stateFactory[type] = [this]() -> GameState*
 		{
 			return new T(this);
 		};
