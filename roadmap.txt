@@ -1,0 +1,29 @@
+TODO
+
+IMPLEMENT GAME STATES
+
+move functionality from Game to GS_Game
+
+removing "intelligence" from enemy spawner, make it only create enemies when asked, move spawning logic to the game state itself
+
+gradually increase difficulty by increasing spawn frequency
+
+create main menu screen
+
+detect enemy collisions with player, trigger game over screen
+
+create game over screen
+
+create "score" overlay
+
+create pause feature
+
+
+---- MILESTONE 1 : VERY SIMPLE, BUT FEATURE COMPLETE GAME! ----
+
+
+implement vector flowfield!!!
+
+implement big boys
+
+implement enemy bullets
