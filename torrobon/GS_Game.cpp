@@ -2,7 +2,9 @@
 #include "StateManager.h"
 
 GS_Game::GS_Game(StateManager* stateMgr) :
-	GameState(stateMgr)
+	GameState(stateMgr),
+	m_elapsed(0.0f),
+	m_spawnInterval(3.0f)
 {}
 
 GS_Game::~GS_Game() {}
@@ -32,6 +34,29 @@ void GS_Game::Update(float dt) {
 	m_stateMgr->GetContext()->m_bulletManager->Update(dt);
 	m_stateMgr->GetContext()->m_effectManager->Update(dt);
 	m_playerPos = m_player->GetPosition();
+
+	m_elapsed += dt;
+	while (m_elapsed > m_spawnInterval) {
+		m_elapsed -= m_spawnInterval;
+
+		float spawnX = rand() % m_stateMgr->GetContext()->
+			m_window->getSize().x;
+		float spawnY = rand() % m_stateMgr->GetContext()->
+			m_window->getSize().y;
+		if (rand() % 2) {
+		if (rand() % 2) { spawnX = 0; }
+		else { spawnX = m_stateMgr->GetContext()->
+			m_window->getSize().x; }
+		}
+		else {
+		if (rand() % 2) { spawnY = 0; }
+		else { spawnY = m_stateMgr->GetContext()->
+			m_window->getSize().y; }
+		}
+
+		m_stateMgr->GetContext()->m_enemyManager->
+			SpawnEnemy({ spawnX, spawnY });
+	}
 }
 
 void GS_Game::Draw() {

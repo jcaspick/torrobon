@@ -20,6 +20,8 @@ public:
 private:
 	Player* m_player;
 	sf::Vector2f m_playerPos;
+	float m_elapsed;
+	float m_spawnInterval;
 };
 
 #endif // !GS_GAME;

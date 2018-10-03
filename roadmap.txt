@@ -4,9 +4,11 @@ IMPLEMENT GAME STATES
 
 **move functionality from Game to GS_Game
 
-removing "intelligence" from enemy spawner, make it only create enemies when asked, move spawning logic to the game state itself
+**removing "intelligence" from enemy spawner, make it only create enemies when asked, move spawning logic to the game state itself
 
 gradually increase difficulty by increasing spawn frequency
+
+add and draw world boundaries
 
 create main menu screen
 

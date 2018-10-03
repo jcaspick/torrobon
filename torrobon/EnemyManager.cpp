@@ -2,19 +2,12 @@
 #include "Context.h"
 
 EnemyManager::EnemyManager(Context* context) :
-	m_context(context),
-	m_spawnInterval(0.8f),
-	m_elapsed(20)
+	m_context(context)
 {}
 
 EnemyManager::~EnemyManager() { Purge(); }
 
 void EnemyManager::Update(float dt) {
-	m_elapsed += dt;
-	if (m_elapsed > m_spawnInterval) {
-		m_elapsed -= m_spawnInterval;
-		SpawnEnemy();
-	}
 	for (auto &itr : m_enemies) {
 		itr->Update(dt);
 	}
@@ -31,19 +24,9 @@ Context* EnemyManager::GetContext() { return m_context; }
 
 std::vector<Enemy*>* EnemyManager::GetEnemyList() { return &m_enemies; }
 
-void EnemyManager::SpawnEnemy() {
+void EnemyManager::SpawnEnemy(const sf::Vector2f& pos) {
 	Enemy* enemy = new Enemy(m_context);
-	float spawnX = rand() % m_context->m_window->getSize().x;
-	float spawnY = rand() % m_context->m_window->getSize().y;
-	if (rand() % 2) {
-		if (rand() % 2) { spawnX = 0; }
-		else { spawnX = m_context->m_window->getSize().x; }
-	}
-	else {
-		if (rand() % 2) { spawnY = 0; }
-		else { spawnY = m_context->m_window->getSize().y; }
-	}
-	enemy->SetPosition({ spawnX, spawnY });
+	enemy->SetPosition(pos);
 	m_enemies.emplace_back(enemy);
 }
 

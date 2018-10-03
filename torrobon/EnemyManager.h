@@ -12,17 +12,15 @@ public:
 
 	void Update(float dt);
 	void Draw();
+	void SpawnEnemy(const sf::Vector2f& pos);
 	Context* GetContext();
 	std::vector<Enemy*>* GetEnemyList();
 		
 private:
-	void SpawnEnemy();
 	void Purge();
 	void RemoveDeadEnemies();
 
 	Context* m_context;
-	float m_spawnInterval;
-	float m_elapsed;
 	std::vector<Enemy*> m_enemies;
 };
 
