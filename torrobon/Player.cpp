@@ -32,6 +32,7 @@ void Player::Update(float dt) {
 	m_position.x += m_deltaPos.x * dt * m_speed;
 	m_position.y += m_deltaPos.y * dt * m_speed;
 	m_sprite.setPosition(m_position);
+	EnforceWorldBoundary();
 }
 
 void Player::Draw() {
@@ -64,4 +65,17 @@ void Player::HandleInput() {
 		m_mousePos = m_context->m_window->
 			mapPixelToCoords(sf::Mouse::getPosition(*m_context->m_window));
 	}
+}
+
+void Player::EnforceWorldBoundary() {
+	// TODO make this less bad
+	float offsetX = 16 + m_sprite.getTextureRect().width / 2;
+	float offsetY = 16 + m_sprite.getTextureRect().height / 2;
+
+	if (m_position.x > m_context->m_window->getSize().x - offsetX)
+		m_position.x = m_context->m_window->getSize().x - offsetX;
+	if (m_position.y > m_context->m_window->getSize().y - offsetY)
+		m_position.y = m_context->m_window->getSize().y - offsetY;
+	if (m_position.x < offsetX) m_position.x = offsetX;
+	if (m_position.y < offsetY) m_position.y = offsetY;
 }

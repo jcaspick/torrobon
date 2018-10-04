@@ -31,12 +31,14 @@ void GS_Game::OnDisable() {
 }
 
 void GS_Game::Update(float dt) {
+	// update entities
 	m_player->Update(dt);
 	m_stateMgr->GetContext()->m_enemyManager->Update(dt);
 	m_stateMgr->GetContext()->m_bulletManager->Update(dt);
 	m_stateMgr->GetContext()->m_effectManager->Update(dt);
 	m_playerPos = m_player->GetPosition();
 
+	// enemy spawning logic
 	m_spawnTimer += dt;
 	while (m_spawnTimer > m_spawnInterval) {
 		m_spawnTimer -= m_spawnInterval;
@@ -60,6 +62,7 @@ void GS_Game::Update(float dt) {
 			SpawnEnemy({ spawnX, spawnY });
 	}
 
+	// difficulty increase logic
 	m_difficultyTimer += dt;
 	while (m_difficultyTimer > m_difficultyInterval) {
 		m_difficultyTimer -= m_difficultyInterval;
@@ -73,4 +76,19 @@ void GS_Game::Draw() {
 	m_stateMgr->GetContext()->m_enemyManager->Draw();
 	m_stateMgr->GetContext()->m_bulletManager->Draw();
 	m_stateMgr->GetContext()->m_effectManager->Draw();
+
+	sf::Vector2f wind = (sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize();
+
+	sf::RectangleShape wallH = sf::RectangleShape({ wind.x, 16.0f });
+	sf::RectangleShape wallV = sf::RectangleShape({ 16.0f, wind.y });
+
+	wallH.setPosition({ 0, 0 });
+	m_stateMgr->GetContext()->m_window->draw(wallH);
+	wallH.setPosition({ 0, wind.y - 16.0f });
+	m_stateMgr->GetContext()->m_window->draw(wallH);
+
+	wallV.setPosition({ 0, 0 });
+	m_stateMgr->GetContext()->m_window->draw(wallV);
+	wallV.setPosition({ wind.x - 16.0f, 0 });
+	m_stateMgr->GetContext()->m_window->draw(wallV);
 }

@@ -18,6 +18,7 @@ public:
 
 private:
 	void HandleInput();
+	void EnforceWorldBoundary();
 
 	float m_speed;
 	float m_elapsed;
