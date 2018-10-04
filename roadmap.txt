@@ -20,6 +20,8 @@ create "score" overlay
 
 create pause feature
 
+make world boundaries affect bullets and enemies
+
 
 ---- MILESTONE 1 : VERY SIMPLE, BUT FEATURE COMPLETE GAME! ----
 

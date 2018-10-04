@@ -12,10 +12,10 @@ BulletManager::~BulletManager() { Purge(); };
 void BulletManager::Update(float dt) {
 	for (auto &itr : m_bullets) {
 		itr->Update(dt);
-		if (itr->m_position.x < 0 ||
-			itr->m_position.x > m_context->m_window->getSize().x ||
-			itr->m_position.y < 0 ||
-			itr->m_position.y > m_context->m_window->getSize().y)
+		if (itr->m_position.x < 8 ||
+			itr->m_position.x > m_context->m_window->getSize().x - 8 ||
+			itr->m_position.y < 8 ||
+			itr->m_position.y > m_context->m_window->getSize().y - 8)
 		{
 			m_context->m_effectManager->
 				CreateEffect(EffectType::SmallYellowExplosion1, itr->m_position);

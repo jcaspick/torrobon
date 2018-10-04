@@ -48,14 +48,14 @@ void GS_Game::Update(float dt) {
 		float spawnY = rand() % m_stateMgr->GetContext()->
 			m_window->getSize().y;
 		if (rand() % 2) {
-		if (rand() % 2) { spawnX = 0; }
+		if (rand() % 2) { spawnX = 40; }
 		else { spawnX = m_stateMgr->GetContext()->
-			m_window->getSize().x; }
+			m_window->getSize().x - 40; }
 		}
 		else {
-		if (rand() % 2) { spawnY = 0; }
+		if (rand() % 2) { spawnY = 40; }
 		else { spawnY = m_stateMgr->GetContext()->
-			m_window->getSize().y; }
+			m_window->getSize().y - 40; }
 		}
 
 		m_stateMgr->GetContext()->m_enemyManager->
@@ -79,16 +79,16 @@ void GS_Game::Draw() {
 
 	sf::Vector2f wind = (sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize();
 
-	sf::RectangleShape wallH = sf::RectangleShape({ wind.x, 16.0f });
-	sf::RectangleShape wallV = sf::RectangleShape({ 16.0f, wind.y });
+	sf::RectangleShape wallH = sf::RectangleShape({ wind.x, 8 });
+	sf::RectangleShape wallV = sf::RectangleShape({ 8, wind.y });
 
 	wallH.setPosition({ 0, 0 });
 	m_stateMgr->GetContext()->m_window->draw(wallH);
-	wallH.setPosition({ 0, wind.y - 16.0f });
+	wallH.setPosition({ 0, wind.y - 8 });
 	m_stateMgr->GetContext()->m_window->draw(wallH);
 
 	wallV.setPosition({ 0, 0 });
 	m_stateMgr->GetContext()->m_window->draw(wallV);
-	wallV.setPosition({ wind.x - 16.0f, 0 });
+	wallV.setPosition({ wind.x - 8, 0 });
 	m_stateMgr->GetContext()->m_window->draw(wallV);
 }

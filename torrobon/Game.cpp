@@ -19,7 +19,7 @@ Game::Game() :
 	m_context.m_enemyManager = &m_enemyManager;
 	m_context.m_effectManager = &m_effectManager;
 
-	m_stateMgr.SetState(StateType::Game);
+	m_stateMgr.SetState(StateType::Menu);
 }
 
 Game::~Game() {};

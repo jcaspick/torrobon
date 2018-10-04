@@ -69,8 +69,8 @@ void Player::HandleInput() {
 
 void Player::EnforceWorldBoundary() {
 	// TODO make this less bad
-	float offsetX = 16 + m_sprite.getTextureRect().width / 2;
-	float offsetY = 16 + m_sprite.getTextureRect().height / 2;
+	float offsetX = 8 + m_sprite.getTextureRect().width / 2;
+	float offsetY = 8 + m_sprite.getTextureRect().height / 2;
 
 	if (m_position.x > m_context->m_window->getSize().x - offsetX)
 		m_position.x = m_context->m_window->getSize().x - offsetX;
