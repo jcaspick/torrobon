@@ -15,7 +15,9 @@ void GS_Game::OnCreate() {
 	m_player = new Player(m_stateMgr->GetContext());
 	m_stateMgr->GetContext()->m_playerPos = &m_playerPos;
 
-	m_player->SetPosition({ 200, 200 });
+	m_player->SetPosition({ 
+		(float)m_stateMgr->GetContext()->m_window->getSize().x / 2,
+		(float)m_stateMgr->GetContext()->m_window->getSize().y / 2 });
 }
 
 void GS_Game::OnDestroy() {
