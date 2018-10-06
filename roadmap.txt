@@ -8,23 +8,34 @@ IMPLEMENT GAME STATES
 
 **gradually increase difficulty by increasing spawn frequency
 
-add and draw world boundaries
+**add and draw world boundaries
 
-create main menu screen
+**create main menu screen
+
+**create game over screen
 
 detect enemy collisions with player, trigger game over screen
-
-create game over screen
 
 create "score" overlay
 
 create pause feature
 
-make world boundaries affect bullets and enemies
-
 
 ---- MILESTONE 1 : VERY SIMPLE, BUT FEATURE COMPLETE GAME! ----
 
+
+refactoring time!
+
+merge player, enemy, and bullet, into a single "entity" class with an entity manager
+	enum of entity types
+	factory pattern spawn function
+
+add world object to keep track of level size and boundary thickness
+
+design some collision handling system
+
+
+---- MORE FUN ----
 
 implement vector flowfield!!!
 

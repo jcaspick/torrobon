@@ -1,12 +1,14 @@
 #include "StateManager.h"
 #include "GS_Game.h"
 #include "GS_Menu.h"
+#include "GS_GameOver.h"
 
 StateManager::StateManager(Context* context) :
 	m_context(context)
 {
 	RegisterState<GS_Game>(StateType::Game);
 	RegisterState<GS_Menu>(StateType::Menu);
+	RegisterState<GS_GameOver>(StateType::GameOver);
 }
 
 StateManager::~StateManager() {
