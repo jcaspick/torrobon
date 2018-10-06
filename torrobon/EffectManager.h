@@ -1,7 +1,7 @@
 #pragma once
 #ifndef EFFECT_MANAGER
 #define EFFECT_MANAGER
-#include "Explosion.h";
+#include "Explosion.h"
 
 enum class EffectType {
 	BigExplosion,

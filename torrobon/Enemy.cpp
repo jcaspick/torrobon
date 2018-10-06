@@ -54,10 +54,11 @@ sf::Vector2f Enemy::GetPosition() { return m_position; }
 sf::FloatRect Enemy::GetAABB() { return m_AABB; }
 
 void Enemy::ChooseDirection() {
-	if (abs(m_context->m_playerPos->x - m_position.x)
-		> abs(m_context->m_playerPos->y - m_position.y))
+	m_goal = m_context->m_player->GetPosition();
+	if (abs(m_goal.x - m_position.x)
+		> abs(m_goal.y - m_position.y))
 	{
-		if (m_context->m_playerPos->x > m_position.x) {
+		if (m_goal.x > m_position.x) {
 			m_direction = { 1, 0 };
 			m_spriteSheet.SetAnimation("right");
 		}
@@ -67,7 +68,7 @@ void Enemy::ChooseDirection() {
 		}
 	}
 	else {
-		if (m_context->m_playerPos->y > m_position.y) {
+		if (m_goal.y > m_position.y) {
 			m_direction = { 0, 1 };
 			m_spriteSheet.SetAnimation("down");
 		}

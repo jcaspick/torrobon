@@ -3,6 +3,9 @@
 #define GS_GAME
 #include "GameState.h"
 #include "Player.h"
+#include "BulletManager.h"
+#include "EnemyManager.h"
+#include "EffectManager.h"
 
 class GS_Game : public GameState {
 	
@@ -19,11 +22,14 @@ public:
 
 private:
 	Player* m_player;
-	sf::Vector2f m_playerPos;
+	BulletManager m_bulletManager;
+	EnemyManager m_enemyManager;
+	EffectManager m_effectManager;
 	float m_spawnTimer;
 	float m_spawnInterval;
 	float m_difficultyTimer;
 	float m_difficultyInterval;
+	float m_gameOverTimer;
 };
 
 #endif // !GS_GAME;

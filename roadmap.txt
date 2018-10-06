@@ -14,7 +14,7 @@ IMPLEMENT GAME STATES
 
 **create game over screen
 
-detect enemy collisions with player, trigger game over screen
+**detect enemy collisions with player, trigger game over screen
 
 create "score" overlay
 

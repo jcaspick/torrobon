@@ -4,10 +4,7 @@ Game::Game() :
 	m_clock(),
 	m_dt(),
 	m_textures("config/textures.cfg"),
-	m_stateMgr(&m_context),
-	m_bulletManager(&m_context),
-	m_enemyManager(&m_context),
-	m_effectManager(&m_context)
+	m_stateMgr(&m_context)
 {
 	m_window.create(sf::VideoMode(800, 800, 32), "torrobon", sf::Style::Default);
 	m_clock.restart();
@@ -15,9 +12,6 @@ Game::Game() :
 
 	m_context.m_window = &m_window;
 	m_context.m_textureHolder = &m_textures;
-	m_context.m_bulletManager = &m_bulletManager;
-	m_context.m_enemyManager = &m_enemyManager;
-	m_context.m_effectManager = &m_effectManager;
 
 	m_stateMgr.SetState(StateType::Menu);
 }
@@ -31,6 +25,7 @@ void Game::Update() {
 	}
 
 	m_stateMgr.Update(m_dt);
+	m_stateMgr.ProcessRemovals();
 	m_dt = m_clock.restart().asSeconds();
 }
 

@@ -5,6 +5,7 @@
 #include "BulletManager.h"
 #include "EnemyManager.h"
 #include "EffectManager.h"
+#include "Player.h"
 
 struct Context {
 	Context() :
@@ -12,7 +13,8 @@ struct Context {
 		m_textureHolder(nullptr),
 		m_bulletManager(nullptr),
 		m_enemyManager(nullptr),
-		m_effectManager(nullptr)
+		m_effectManager(nullptr),
+		m_player(nullptr)
 	{}
 
 	sf::RenderWindow* m_window;
@@ -20,7 +22,7 @@ struct Context {
 	BulletManager* m_bulletManager;
 	EnemyManager* m_enemyManager;
 	EffectManager* m_effectManager;
-	sf::Vector2f* m_playerPos;
+	Player* m_player;
 };
 
 #endif // !CONTEXT

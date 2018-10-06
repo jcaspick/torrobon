@@ -24,11 +24,14 @@ public:
 	void Update(float dt);
 	void Draw();
 	void SetState(const StateType& state);
+	void RemoveState(const StateType& state);
+	void ProcessRemovals();
 
 	Context* GetContext();
 
 private:
 	void CreateState(const StateType& state);
+	void DestroyState(const StateType& state);
 
 	template<class T>
 	void RegisterState(const StateType& type) {
@@ -40,6 +43,7 @@ private:
 
 	Context* m_context;
 	StateStack m_states;
+	std::vector<StateType> m_toRemove;
 	StateFactory m_stateFactory;
 };
 

@@ -24,6 +24,7 @@ private:
 
 	SpriteSheet m_spriteSheet;
 	sf::Vector2f m_position;
+	sf::Vector2f m_goal;
 	Context* m_context;
 	float m_speed;
 	sf::Vector2f m_direction;

@@ -1,4 +1,4 @@
-#include "Explosion.h";
+#include "Explosion.h"
 #include "EffectManager.h"
 
 Explosion::Explosion(EffectManager* effectMgr, const std::string& config) :

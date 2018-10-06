@@ -81,12 +81,34 @@ void StateManager::SetState(const StateType& state) {
 	m_states.back().second->OnEnable();
 }
 
+void StateManager::RemoveState(const StateType& state) {
+	m_toRemove.push_back(state);
+}
+
+void StateManager::ProcessRemovals() {
+	while (m_toRemove.begin() != m_toRemove.end()) {
+		DestroyState(*m_toRemove.begin());
+		m_toRemove.erase(m_toRemove.begin());
+	}
+}
+
 void StateManager::CreateState(const StateType& type) {
 	auto stateBuilder = m_stateFactory.find(type);
 	if (stateBuilder == m_stateFactory.end()) { return; }
 	GameState* state = stateBuilder->second();
 	m_states.emplace_back(type, state);
 	state->OnCreate();
+}
+
+void StateManager::DestroyState(const StateType& type) {
+	for (auto itr = m_states.begin(); itr != m_states.end(); ++itr) {
+		if (itr->first == type) {
+			itr->second->OnDestroy();
+			delete itr->second;
+			m_states.erase(itr);
+			return;
+		}
+	}
 }
 
 Context* StateManager::GetContext() { return m_context; }

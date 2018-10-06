@@ -11,6 +11,7 @@ void EnemyManager::Update(float dt) {
 	for (auto &itr : m_enemies) {
 		itr->Update(dt);
 	}
+	CheckPlayerCollision();
 	RemoveDeadEnemies();
 }
 
@@ -43,6 +44,18 @@ void EnemyManager::RemoveDeadEnemies() {
 			m_context->m_effectManager->BigExplosion(m_enemies[i]->GetPosition());
 			delete m_enemies[i];
 			m_enemies.erase(m_enemies.begin() + i);
+		}
+	}
+}
+
+void EnemyManager::CheckPlayerCollision() {
+	if (!m_context->m_player->IsAlive()) return;
+	sf::FloatRect playerAABB = m_context->m_player->GetAABB();
+	for (auto &itr : m_enemies) {
+		if (itr->GetAABB().intersects(playerAABB)) {
+			m_context->m_effectManager->BigExplosion(
+				m_context->m_player->GetPosition());
+			m_context->m_player->Kill();
 		}
 	}
 }

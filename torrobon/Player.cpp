@@ -1,12 +1,14 @@
 #include "Player.h"
 #include "Utilities.h"
+#include "Context.h"
 
 Player::Player(Context* context) :
 	m_context(context),
 	m_speed(250.0f),
 	m_texture("player"),
 	m_elapsed(0),
-	m_shotInterval(0.05f)
+	m_shotInterval(0.05f),
+	m_alive(true)
 {
 	m_sprite.setTexture(*context->m_textureHolder->GetTexture(m_texture));
 	m_sprite.setOrigin(
@@ -18,6 +20,7 @@ Player::Player(Context* context) :
 Player::~Player() {}
 
 void Player::Update(float dt) {
+	if (!m_alive) return;
 	m_elapsed += dt;
 	if (m_elapsed >= m_shotInterval) {
 		if (m_shooting) {
@@ -33,10 +36,16 @@ void Player::Update(float dt) {
 	m_position.y += m_deltaPos.y * dt * m_speed;
 	m_sprite.setPosition(m_position);
 	EnforceWorldBoundary();
+	UpdateAABB();
 }
 
 void Player::Draw() {
+	if (!m_alive) return;
 	m_context->m_window->draw(m_sprite);
+}
+
+void Player::Kill() {
+	m_alive = false;
 }
 
 void Player::SetPosition(sf::Vector2f pos) {
@@ -44,6 +53,20 @@ void Player::SetPosition(sf::Vector2f pos) {
 }
 
 sf::Vector2f Player::GetPosition() { return m_position; }
+
+sf::FloatRect Player::GetAABB() {
+	return m_AABB;
+}
+
+bool Player::IsAlive() { return m_alive; }
+
+void Player::UpdateAABB() {
+	m_AABB = sf::FloatRect(
+		m_position.x - m_sprite.getTexture()->getSize().x / 2,
+		m_position.y - m_sprite.getTexture()->getSize().y / 2,
+		m_sprite.getTexture()->getSize().x,
+		m_sprite.getTexture()->getSize().y);
+}
 
 void Player::HandleInput() {
 	m_deltaPos = { 0, 0 };

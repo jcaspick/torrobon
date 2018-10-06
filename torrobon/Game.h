@@ -3,8 +3,6 @@
 #define GAME
 #include "SpriteSheet.h"
 #include "TextureHolder.h"
-#include "BulletManager.h"
-#include "EnemyManager.h"
 #include "StateManager.h"
 
 class Game {
@@ -25,9 +23,6 @@ private:
 	StateManager m_stateMgr;
 	sf::RenderWindow m_window;
 	TextureHolder m_textures;
-	BulletManager m_bulletManager;
-	EnemyManager m_enemyManager;
-	EffectManager m_effectManager;
 	sf::Vector2f m_playerPos;
 };
 

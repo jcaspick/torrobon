@@ -19,6 +19,7 @@ public:
 private:
 	void Purge();
 	void RemoveDeadEnemies();
+	void CheckPlayerCollision();
 
 	Context* m_context;
 	std::vector<Enemy*> m_enemies;
