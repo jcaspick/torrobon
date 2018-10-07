@@ -29,6 +29,10 @@ void GS_Game::OnCreate() {
 	m_player->SetPosition({ 
 		(float)m_stateMgr->GetContext()->m_window->getSize().x / 2,
 		(float)m_stateMgr->GetContext()->m_window->getSize().y / 2 });
+
+	m_bg.setFillColor(sf::Color(90, 90, 90, 255));
+	m_bg.setPosition({ 0,0 });
+	m_bg.setSize((sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize());
 }
 
 void GS_Game::OnDestroy() {
@@ -98,6 +102,8 @@ void GS_Game::Update(float dt) {
 }
 
 void GS_Game::Draw() {
+	m_stateMgr->GetContext()->m_window->draw(m_bg);
+
 	m_player->Draw();
 	m_stateMgr->GetContext()->m_enemyManager->Draw();
 	m_stateMgr->GetContext()->m_bulletManager->Draw();

@@ -32,6 +32,8 @@ private:
 	float m_gameOverTimer;
 	sf::Text m_scoreText;
 	sf::Font m_font;
+	SpriteSheet m_test;
+	sf::RectangleShape m_bg;
 };
 
 #endif // !GS_GAME;
