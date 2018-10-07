@@ -60,6 +60,10 @@ sf::FloatRect Player::GetAABB() {
 
 bool Player::IsAlive() { return m_alive; }
 
+void Player::AddScore(int score) { m_score += score; }
+
+int Player::GetScore() { return m_score; }
+
 void Player::UpdateAABB() {
 	m_AABB = sf::FloatRect(
 		m_position.x - m_sprite.getTexture()->getSize().x / 2,

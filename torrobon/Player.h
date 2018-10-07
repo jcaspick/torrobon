@@ -19,6 +19,8 @@ public:
 	sf::Vector2f GetPosition();
 	sf::FloatRect GetAABB();
 	bool IsAlive();
+	void AddScore(int score);
+	int GetScore();
 
 private:
 	void UpdateAABB();
@@ -37,6 +39,7 @@ private:
 	std::string m_texture;
 	sf::FloatRect m_AABB;
 	Context* m_context;
+	float m_score;
 };
 
 #endif // !PLAYER

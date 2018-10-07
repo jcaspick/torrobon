@@ -30,6 +30,8 @@ private:
 	float m_difficultyTimer;
 	float m_difficultyInterval;
 	float m_gameOverTimer;
+	sf::Text m_scoreText;
+	sf::Font m_font;
 };
 
 #endif // !GS_GAME;

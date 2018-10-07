@@ -44,6 +44,7 @@ void EnemyManager::RemoveDeadEnemies() {
 			m_context->m_effectManager->BigExplosion(m_enemies[i]->GetPosition());
 			delete m_enemies[i];
 			m_enemies.erase(m_enemies.begin() + i);
+			m_context->m_player->AddScore(1);
 		}
 	}
 }

@@ -16,10 +16,6 @@ IMPLEMENT GAME STATES
 
 **detect enemy collisions with player, trigger game over screen
 
-create "score" overlay
-
-create pause feature
-
 
 ---- MILESTONE 1 : VERY SIMPLE, BUT FEATURE COMPLETE GAME! ----
 

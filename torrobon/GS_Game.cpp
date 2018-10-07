@@ -14,6 +14,10 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 	m_stateMgr->GetContext()->m_bulletManager = &m_bulletManager;
 	m_stateMgr->GetContext()->m_enemyManager = &m_enemyManager;
 	m_stateMgr->GetContext()->m_effectManager = &m_effectManager;
+
+	m_font.loadFromFile("fonts/BMjapan.TTF");
+	m_scoreText.setFont(m_font);
+	m_scoreText.setPosition(32, 32);
 }
 
 GS_Game::~GS_Game() {}
@@ -86,6 +90,11 @@ void GS_Game::Update(float dt) {
 			
 		}
 	}
+
+	// score counter
+	m_scoreText.setString("SCORE: " + 
+		std::to_string(m_stateMgr->GetContext()->
+			m_player->GetScore()));
 }
 
 void GS_Game::Draw() {
@@ -108,4 +117,6 @@ void GS_Game::Draw() {
 	m_stateMgr->GetContext()->m_window->draw(wallV);
 	wallV.setPosition({ wind.x - 8, 0 });
 	m_stateMgr->GetContext()->m_window->draw(wallV);
+
+	m_stateMgr->GetContext()->m_window->draw(m_scoreText);
 }
