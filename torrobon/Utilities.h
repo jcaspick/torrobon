@@ -16,6 +16,12 @@ namespace Utils {
 	inline float Vec2Rot(sf::Vector2f vector) {
 		return atan2f(vector.x, -vector.y) * RAD2DEG;
 	}
+
+	inline sf::Vector2f Normalize(sf::Vector2f vector) {
+		float length = std::hypotf(vector.x, vector.y);
+		if (length != 0) vector /= length;
+		return vector;
+	}
 }
 
 #endif // !UTILITIES
