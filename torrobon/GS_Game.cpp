@@ -109,7 +109,7 @@ void GS_Game::Draw() {
 	m_entityManager.Draw();
 	m_bulletManager.Draw();
 	m_effectManager.Draw();
-	m_debugView.Draw();
+	//m_debugView.Draw();
 
 	sf::Vector2f wind = (sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize();
 

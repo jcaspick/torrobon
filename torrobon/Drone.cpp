@@ -7,8 +7,8 @@ Drone::Drone(Context* context) :
 	m_speed(150.0f),
 	m_directionInterval(0.5f)
 {
-	m_rectSize = { 32, 32 };
-	m_rectAnchor = Anchor::Bottom;
+	m_rectSize = { 32, 40 };
+	m_rectOffset = { 0, 12 };
 	m_spriteSheet.SetScale({ 2, 2 });
 	m_health = 5;
 }
