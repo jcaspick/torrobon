@@ -17,6 +17,8 @@ void Entity::Move(const sf::Vector2f& delta) {
 		m_position.y + delta.y });
 }
 
+void Entity::OnDeath() {}
+
 // setters
 void Entity::SetPosition(const sf::Vector2f& pos) { m_position = pos; }
 void Entity::SetCollisionSize(const sf::Vector2f& size) { m_rectSize = size; }
