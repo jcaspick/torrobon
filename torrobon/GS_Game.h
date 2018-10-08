@@ -6,8 +6,7 @@
 #include "BulletManager.h"
 #include "EntityManager.h"
 #include "EffectManager.h"
-
-#include "Stompy.h"
+#include "EntityDebugView.h"
 
 class GS_Game : public GameState {
 	
@@ -35,6 +34,8 @@ private:
 	sf::Text m_scoreText;
 	sf::Font m_font;
 	sf::RectangleShape m_bg;
+
+	EntityDebugView m_debugView;
 };
 
 #endif // !GS_GAME;

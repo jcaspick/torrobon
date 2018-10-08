@@ -9,7 +9,8 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 	m_spawnTimer(12.0f),
 	m_spawnInterval(3.0f),
 	m_difficultyTimer(0.0f),
-	m_difficultyInterval(10.0f)
+	m_difficultyInterval(10.0f),
+	m_debugView(m_stateMgr->GetContext())
 {
 	m_stateMgr->GetContext()->m_bulletManager = &m_bulletManager;
 	m_stateMgr->GetContext()->m_entityManager = &m_entityManager;
@@ -108,6 +109,7 @@ void GS_Game::Draw() {
 	m_entityManager.Draw();
 	m_bulletManager.Draw();
 	m_effectManager.Draw();
+	m_debugView.Draw();
 
 	sf::Vector2f wind = (sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize();
 
