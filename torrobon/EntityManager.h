@@ -22,6 +22,7 @@ public:
 	void Update(float dt);
 	void Draw();
 	void Spawn(EntityType type, const sf::Vector2f& pos);
+	void SpawnBullet(sf::Vector2f pos, sf::Vector2f dir, float speed);
 
 	Context* GetContext();
 	std::vector<Entity*>* GetEntities();

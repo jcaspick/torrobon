@@ -1,8 +1,11 @@
 #include "EntityManager.h"
 #include <iostream>
 #include "Context.h"
+
+// entity classes
 #include "Drone.h"
 #include "Stompy.h"
+#include "EnemyBullet.h"
 
 EntityManager::EntityManager(Context* context) :
 	m_context(context)
@@ -42,6 +45,15 @@ void EntityManager::Spawn(EntityType type, const sf::Vector2f& pos) {
 	Entity* entity = itr->second();
 	entity->SetPosition(pos);
 	m_entities.emplace_back(entity);
+}
+
+void EntityManager::SpawnBullet(sf::Vector2f pos, sf::Vector2f dir, float speed) {
+	EnemyBullet* bullet = new EnemyBullet(m_context);
+	bullet->SetPosition(pos);
+	bullet->SetDirection(dir);
+	bullet->SetSpeed(speed);
+
+	m_entities.emplace_back(bullet);
 }
 
 void EntityManager::Purge() {
