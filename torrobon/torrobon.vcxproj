@@ -131,6 +131,7 @@
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GS_Game.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="Stompy.cpp" />
     <ClCompile Include="TextureHolder.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +152,7 @@
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
@@ -159,6 +162,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="Stompy.h" />
     <ClInclude Include="TextureHolder.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
@@ -168,6 +172,7 @@
     <None Include="config\bot2.cfg" />
     <None Include="config\directionalBullet.cfg" />
     <None Include="config\smallExplosions.cfg" />
+    <None Include="config\stompy.cfg" />
     <None Include="config\textures.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

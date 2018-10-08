@@ -63,6 +63,12 @@
     <ClCompile Include="GS_GameOver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stompy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -119,6 +125,12 @@
     <ClInclude Include="GS_GameOver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stompy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config\bot1.cfg">
@@ -137,6 +149,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="config\bigExplosion.cfg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="config\stompy.cfg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

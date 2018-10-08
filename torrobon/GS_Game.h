@@ -7,6 +7,8 @@
 #include "EnemyManager.h"
 #include "EffectManager.h"
 
+#include "Stompy.h"
+
 class GS_Game : public GameState {
 	
 public:
@@ -32,7 +34,6 @@ private:
 	float m_gameOverTimer;
 	sf::Text m_scoreText;
 	sf::Font m_font;
-	SpriteSheet m_test;
 	sf::RectangleShape m_bg;
 };
 
