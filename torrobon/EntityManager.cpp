@@ -54,6 +54,7 @@ void EntityManager::Purge() {
 void EntityManager::RemoveDead() {
 	for (int i = m_entities.size() - 1; i >= 0; --i) {
 		if (m_entities[i]->GetHealth() <= 0) {
+			m_entities[i]->OnDeath();
 			m_context->m_effectManager->BigExplosion(m_entities[i]->GetPosition());
 			delete m_entities[i];
 			m_entities.erase(m_entities.begin() + i);

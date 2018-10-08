@@ -32,6 +32,10 @@ void Drone::Draw() {
 	m_spriteSheet.Draw(m_context->m_window);
 }
 
+void Drone::OnDeath() {
+	m_context->m_player->AddScore(1);
+}
+
 void Drone::ChooseDirection() {
 	sf::Vector2f goal = m_context->m_player->GetPosition();
 	if (abs(goal.x - m_position.x)

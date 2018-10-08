@@ -12,6 +12,7 @@ public:
 
 	void Update(float dt);
 	void Draw();
+	void OnDeath();
 
 private:
 	void ChooseDirection();

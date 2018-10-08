@@ -17,6 +17,7 @@ public:
 
 	virtual void Update(float dt) = 0;
 	virtual void Draw() = 0;
+	virtual void OnDeath();
 	void AddDamage(const float& damage);
 	void Move(const sf::Vector2f& delta);
 

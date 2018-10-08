@@ -6,7 +6,10 @@ Stompy::Stompy(Context* context) :
 	Entity(context),
 	m_mode(Mode::Waiting),
 	m_spriteSheet("config/stompy.cfg")
-{}
+{
+	m_health = 50;
+	m_rectSize = { 90, 96 };
+}
 
 Stompy::~Stompy() {}
 
@@ -38,6 +41,10 @@ void Stompy::Update(float dt) {
 
 void Stompy::Draw() {
 	m_spriteSheet.Draw(m_context->m_window);
+}
+
+void Stompy::OnDeath() {
+	m_context->m_player->AddScore(10);
 }
 
 void Stompy::ChooseDirection() {
