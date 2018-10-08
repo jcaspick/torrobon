@@ -4,7 +4,7 @@
 GS_Game::GS_Game(StateManager* stateMgr) :
 	GameState(stateMgr),
 	m_bulletManager(m_stateMgr->GetContext()),
-	m_enemyManager(m_stateMgr->GetContext()),
+	m_entityManager(m_stateMgr->GetContext()),
 	m_effectManager(m_stateMgr->GetContext()),
 	m_spawnTimer(12.0f),
 	m_spawnInterval(3.0f),
@@ -12,7 +12,7 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 	m_difficultyInterval(10.0f)
 {
 	m_stateMgr->GetContext()->m_bulletManager = &m_bulletManager;
-	m_stateMgr->GetContext()->m_enemyManager = &m_enemyManager;
+	m_stateMgr->GetContext()->m_entityManager = &m_entityManager;
 	m_stateMgr->GetContext()->m_effectManager = &m_effectManager;
 
 	m_font.loadFromFile("fonts/BMjapan.TTF");
@@ -50,9 +50,9 @@ void GS_Game::OnDisable() {
 void GS_Game::Update(float dt) {
 	// update entities
 	m_player->Update(dt);
-	m_stateMgr->GetContext()->m_enemyManager->Update(dt);
-	m_stateMgr->GetContext()->m_bulletManager->Update(dt);
-	m_stateMgr->GetContext()->m_effectManager->Update(dt);
+	m_entityManager.Update(dt);
+	m_bulletManager.Update(dt);
+	m_effectManager.Update(dt);
 
 	// enemy spawning logic
 	m_spawnTimer += dt;
@@ -74,8 +74,8 @@ void GS_Game::Update(float dt) {
 			m_window->getSize().y - 40; }
 		}
 
-		m_stateMgr->GetContext()->m_enemyManager->
-			SpawnEnemy({ spawnX, spawnY });
+		m_stateMgr->GetContext()->m_entityManager->
+			Spawn(EntityType::Drone, { spawnX, spawnY });
 	}
 
 	// difficulty increase logic
@@ -105,9 +105,9 @@ void GS_Game::Draw() {
 	m_stateMgr->GetContext()->m_window->draw(m_bg);
 
 	m_player->Draw();
-	m_stateMgr->GetContext()->m_enemyManager->Draw();
-	m_stateMgr->GetContext()->m_bulletManager->Draw();
-	m_stateMgr->GetContext()->m_effectManager->Draw();
+	m_entityManager.Draw();
+	m_bulletManager.Draw();
+	m_effectManager.Draw();
 
 	sf::Vector2f wind = (sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize();
 

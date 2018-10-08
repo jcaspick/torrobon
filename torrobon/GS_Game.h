@@ -4,7 +4,7 @@
 #include "GameState.h"
 #include "Player.h"
 #include "BulletManager.h"
-#include "EnemyManager.h"
+#include "EntityManager.h"
 #include "EffectManager.h"
 
 #include "Stompy.h"
@@ -25,7 +25,7 @@ public:
 private:
 	Player* m_player;
 	BulletManager m_bulletManager;
-	EnemyManager m_enemyManager;
+	EntityManager m_entityManager;
 	EffectManager m_effectManager;
 	float m_spawnTimer;
 	float m_spawnInterval;

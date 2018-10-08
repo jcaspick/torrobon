@@ -52,14 +52,14 @@ void BulletManager::Purge() {
 }
 
 void BulletManager::CheckCollisions() {
-	std::vector<Enemy*> enemies = *m_context->m_enemyManager->GetEnemyList();
+	std::vector<Entity*> enemies = *m_context->m_entityManager->GetEntities();
 
 	for (auto itr : m_bullets) {
 		for (auto itr2 : enemies) {
-			if (itr->m_AABB.intersects(itr2->GetAABB())) {
+			if (itr->m_AABB.intersects(itr2->GetRect())) {
 				m_context->m_effectManager->
 					CreateEffect(EffectType::SmallYellowExplosion1, itr->m_position);
-				itr2->Damage(1);
+				itr2->AddDamage(1);
 				itr->m_deleteFlag = true;
 			}
 		}

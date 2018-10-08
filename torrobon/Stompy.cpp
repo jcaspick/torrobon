@@ -33,6 +33,7 @@ void Stompy::Update(float dt) {
 
 	m_spriteSheet.SetPosition(m_position);
 	m_spriteSheet.Update(dt);
+	UpdateRect();
 }
 
 void Stompy::Draw() {
