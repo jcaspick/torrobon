@@ -79,12 +79,21 @@ void GS_Game::Update(float dt) {
 			Spawn(EntityType::Drone, { spawnX, spawnY });
 	}
 
-	// difficulty increase logic
+	// difficulty increase + stompy spawn
 	m_difficultyTimer += dt;
 	while (m_difficultyTimer > m_difficultyInterval) {
 		m_difficultyTimer -= m_difficultyInterval;
-		m_spawnTimer += 5;
 		m_spawnInterval = std::max(m_spawnInterval - 0.2f, 0.5f);
+
+		float spawnX, spawnY;
+		if (rand() % 2) spawnX = 90;
+		else spawnX = m_stateMgr->GetContext()->
+			m_window->getSize().x - 90;
+		if (rand() % 2) spawnY = 90;
+		else spawnY = m_stateMgr->GetContext()->
+			m_window->getSize().x - 90;
+		m_stateMgr->GetContext()->m_entityManager->Spawn(
+			EntityType::Stompy, { spawnX, spawnY });
 	}
 
 	// game over
