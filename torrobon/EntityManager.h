@@ -2,6 +2,7 @@
 #ifndef ENTITY_MANAGER
 #define ENTITY_MANAGER
 #include "Entity.h"
+#include "EnemyBullet.h"
 #include <unordered_map>
 #include <functional>
 
@@ -34,6 +35,7 @@ private:
 
 	Context* m_context;
 	std::vector<Entity*> m_entities;
+	std::vector<EnemyBullet*> m_bullets;
 	EntityFactory m_entityFactory;
 };
 

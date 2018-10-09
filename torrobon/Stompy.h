@@ -8,7 +8,8 @@ class Stompy : public Entity {
 
 	enum class Mode {
 		Waiting,
-		Chasing
+		Chasing,
+		Shooting
 	};
 
 public:
@@ -26,6 +27,8 @@ private:
 	SpriteSheet m_spriteSheet;
 	sf::Vector2f m_direction;
 	float m_elapsed;
+	float m_shotTimer;
+	float m_shotInterval;
 };
 
 #endif // !STOMPY
