@@ -2,7 +2,8 @@
 #include "Context.h"
 
 Entity::Entity(Context* context) :
-	m_context(context)
+	m_context(context),
+	m_health(1)
 {}
 
 Entity::~Entity() {}
