@@ -27,5 +27,8 @@ void GS_Menu::Update(float dt) {
 }
 
 void GS_Menu::Draw() {
+	m_stateMgr->GetContext()->m_window->setView(
+		m_stateMgr->GetContext()->m_window->getDefaultView());
+
 	m_stateMgr->GetContext()->m_window->draw(m_sprite);
 }

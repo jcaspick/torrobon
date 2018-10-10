@@ -35,6 +35,9 @@ void GS_GameOver::Update(float dt) {
 }
 
 void GS_GameOver::Draw() {
+	m_stateMgr->GetContext()->m_window->setView(
+		m_stateMgr->GetContext()->m_window->getDefaultView());
+
 	sf::RectangleShape overlay = sf::RectangleShape(
 		(sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize());
 	overlay.setFillColor(sf::Color(0, 0, 0, 150));
