@@ -23,6 +23,8 @@ public:
 	void Draw();
 
 private:
+	void SetView();
+
 	Player* m_player;
 	World m_world;
 	BulletManager m_bulletManager;
@@ -36,6 +38,7 @@ private:
 	sf::Text m_scoreText;
 	sf::Font m_font;
 	sf::RectangleShape m_bg;
+	sf::View m_view;
 
 	EntityDebugView m_debugView;
 };
