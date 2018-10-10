@@ -29,6 +29,7 @@ private:
 	float m_elapsed;
 	float m_shotTimer;
 	float m_shotInterval;
+	int m_pauses;
 };
 
 #endif // !STOMPY

@@ -7,7 +7,7 @@ Stompy::Stompy(Context* context) :
 	Entity(context),
 	m_mode(Mode::Waiting),
 	m_spriteSheet("config/stompy.cfg"),
-	m_shotInterval(0.4f)
+	m_shotInterval(0.2f)
 {
 	m_health = 50;
 	m_rectSize = { 90, 96 };
@@ -21,9 +21,10 @@ void Stompy::Update(float dt) {
 	switch (m_mode)
 	{
 	case Stompy::Mode::Waiting:
-		if (m_elapsed > 0.5f) {
-			m_elapsed -= 0.5f;
+		if (m_elapsed > 0.8f) {
+			m_elapsed -= 0.8f;
 			ChooseDirection();
+			m_pauses++;
 			m_mode = Mode::Chasing;
 		}
 		break;
@@ -31,7 +32,13 @@ void Stompy::Update(float dt) {
 	case Stompy::Mode::Chasing:
 		if (m_elapsed > 1.5f) {
 			m_elapsed -= 1.5f;
-			m_mode = Mode::Shooting;
+			if (m_pauses >= 3) {
+				m_pauses = 0;
+				m_mode = Mode::Shooting;
+			}
+			else {
+				m_mode = Mode::Waiting;
+			}
 		}
 		Move(m_direction * dt * 50.0f);
 		break;
@@ -43,10 +50,10 @@ void Stompy::Update(float dt) {
 			m_context->m_entityManager->SpawnBullet(
 				m_position, 
 				Utils::Normalize(m_context->m_player->GetPosition() - m_position), 
-				200);
+				300);
 		}
-		if (m_elapsed > 2.0f) {
-			m_elapsed -= 2.0f;
+		if (m_elapsed > 3.0f) {
+			m_elapsed -= 3.0f;
 			m_shotTimer = 0.0f;
 			m_mode = Mode::Chasing;
 		}
