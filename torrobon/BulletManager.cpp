@@ -10,12 +10,15 @@ BulletManager::BulletManager(Context* context) :
 BulletManager::~BulletManager() { Purge(); };
 
 void BulletManager::Update(float dt) {
+	sf::Vector2f worldSize = m_context->m_world->GetSize();
+	float thickness = m_context->m_world->GetWallThickness();
+
 	for (auto &itr : m_bullets) {
 		itr->Update(dt);
-		if (itr->m_position.x < 8 ||
-			itr->m_position.x > m_context->m_window->getSize().x - 8 ||
-			itr->m_position.y < 8 ||
-			itr->m_position.y > m_context->m_window->getSize().y - 8)
+		if (itr->m_position.x < thickness ||
+			itr->m_position.x > worldSize.x - thickness ||
+			itr->m_position.y < thickness ||
+			itr->m_position.y > worldSize.y - thickness)
 		{
 			m_context->m_effectManager->
 				CreateEffect(EffectType::SmallYellowExplosion1, itr->m_position);

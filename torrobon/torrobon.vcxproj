@@ -144,6 +144,7 @@
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Stompy.cpp" />
     <ClCompile Include="TextureHolder.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Stompy.h" />
     <ClInclude Include="TextureHolder.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\bigExplosion.cfg" />

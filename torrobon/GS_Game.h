@@ -3,6 +3,7 @@
 #define GS_GAME
 #include "GameState.h"
 #include "Player.h"
+#include "World.h"
 #include "BulletManager.h"
 #include "EntityManager.h"
 #include "EffectManager.h"
@@ -23,6 +24,7 @@ public:
 
 private:
 	Player* m_player;
+	World m_world;
 	BulletManager m_bulletManager;
 	EntityManager m_entityManager;
 	EffectManager m_effectManager;

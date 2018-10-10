@@ -1,6 +1,7 @@
 #pragma once
 #ifndef CONTEXT
 #define CONTEXT
+#include "World.h"
 #include "TextureHolder.h"
 #include "BulletManager.h"
 #include "EntityManager.h"
@@ -10,6 +11,7 @@
 struct Context {
 	Context() :
 		m_window(nullptr),
+		m_world(nullptr),
 		m_textureHolder(nullptr),
 		m_bulletManager(nullptr),
 		m_entityManager(nullptr),
@@ -18,6 +20,7 @@ struct Context {
 	{}
 
 	sf::RenderWindow* m_window;
+	World* m_world;
 	TextureHolder* m_textureHolder;
 	BulletManager* m_bulletManager;
 	EntityManager* m_entityManager;

@@ -3,6 +3,7 @@
 
 GS_Game::GS_Game(StateManager* stateMgr) :
 	GameState(stateMgr),
+	m_world({ 500, 500 }, 8),
 	m_bulletManager(m_stateMgr->GetContext()),
 	m_entityManager(m_stateMgr->GetContext()),
 	m_effectManager(m_stateMgr->GetContext()),
@@ -12,6 +13,7 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 	m_difficultyInterval(10.0f),
 	m_debugView(m_stateMgr->GetContext())
 {
+	m_stateMgr->GetContext()->m_world = &m_world;
 	m_stateMgr->GetContext()->m_bulletManager = &m_bulletManager;
 	m_stateMgr->GetContext()->m_entityManager = &m_entityManager;
 	m_stateMgr->GetContext()->m_effectManager = &m_effectManager;
@@ -28,12 +30,12 @@ void GS_Game::OnCreate() {
 	m_stateMgr->GetContext()->m_player = m_player;
 
 	m_player->SetPosition({ 
-		(float)m_stateMgr->GetContext()->m_window->getSize().x / 2,
-		(float)m_stateMgr->GetContext()->m_window->getSize().y / 2 });
+		m_stateMgr->GetContext()->m_world->GetSize().x / 2,
+		m_stateMgr->GetContext()->m_world->GetSize().y / 2 });
 
 	m_bg.setFillColor(sf::Color(90, 90, 90, 255));
 	m_bg.setPosition({ 0,0 });
-	m_bg.setSize((sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize());
+	m_bg.setSize((sf::Vector2f)m_stateMgr->GetContext()->m_world->GetSize());
 }
 
 void GS_Game::OnDestroy() {
@@ -60,19 +62,19 @@ void GS_Game::Update(float dt) {
 	while (m_spawnTimer > m_spawnInterval) {
 		m_spawnTimer -= m_spawnInterval;
 
-		float spawnX = rand() % m_stateMgr->GetContext()->
-			m_window->getSize().x;
-		float spawnY = rand() % m_stateMgr->GetContext()->
-			m_window->getSize().y;
+		float spawnX = rand() % (int)m_stateMgr->GetContext()->
+			m_world->GetSize().x;
+		float spawnY = rand() % (int)m_stateMgr->GetContext()->
+			m_world->GetSize().y;
 		if (rand() % 2) {
 		if (rand() % 2) { spawnX = 40; }
 		else { spawnX = m_stateMgr->GetContext()->
-			m_window->getSize().x - 40; }
+			m_world->GetSize().x - 40; }
 		}
 		else {
 		if (rand() % 2) { spawnY = 40; }
 		else { spawnY = m_stateMgr->GetContext()->
-			m_window->getSize().y - 40; }
+			m_world->GetSize().y - 40; }
 		}
 
 		m_stateMgr->GetContext()->m_entityManager->
@@ -88,10 +90,10 @@ void GS_Game::Update(float dt) {
 		float spawnX, spawnY;
 		if (rand() % 2) spawnX = 90;
 		else spawnX = m_stateMgr->GetContext()->
-			m_window->getSize().x - 90;
+			m_world->GetSize().x - 90;
 		if (rand() % 2) spawnY = 90;
 		else spawnY = m_stateMgr->GetContext()->
-			m_window->getSize().x - 90;
+			m_world->GetSize().x - 90;
 		m_stateMgr->GetContext()->m_entityManager->Spawn(
 			EntityType::Stompy, { spawnX, spawnY });
 	}
@@ -117,23 +119,9 @@ void GS_Game::Draw() {
 	m_player->Draw();
 	m_entityManager.Draw();
 	m_bulletManager.Draw();
+	m_world.Draw(m_stateMgr->GetContext()->m_window);
 	m_effectManager.Draw();
 	//m_debugView.Draw();
-
-	sf::Vector2f wind = (sf::Vector2f)m_stateMgr->GetContext()->m_window->getSize();
-
-	sf::RectangleShape wallH = sf::RectangleShape({ wind.x, 8 });
-	sf::RectangleShape wallV = sf::RectangleShape({ 8, wind.y });
-
-	wallH.setPosition({ 0, 0 });
-	m_stateMgr->GetContext()->m_window->draw(wallH);
-	wallH.setPosition({ 0, wind.y - 8 });
-	m_stateMgr->GetContext()->m_window->draw(wallH);
-
-	wallV.setPosition({ 0, 0 });
-	m_stateMgr->GetContext()->m_window->draw(wallV);
-	wallV.setPosition({ wind.x - 8, 0 });
-	m_stateMgr->GetContext()->m_window->draw(wallV);
 
 	m_stateMgr->GetContext()->m_window->draw(m_scoreText);
 }
