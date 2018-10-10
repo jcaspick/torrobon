@@ -8,7 +8,9 @@ Player::Player(Context* context) :
 	m_texture("player"),
 	m_elapsed(0),
 	m_shotInterval(0.05f),
-	m_alive(true)
+	m_alive(true),
+	m_rectSize(18, 32),
+	m_hitboxSize(6, 6)
 {
 	m_sprite.setTexture(*context->m_textureHolder->GetTexture(m_texture));
 	m_sprite.setOrigin(
@@ -48,28 +50,19 @@ void Player::Kill() {
 	m_alive = false;
 }
 
-void Player::SetPosition(sf::Vector2f pos) {
-	m_position = pos;
-}
-
-sf::Vector2f Player::GetPosition() { return m_position; }
-
-sf::FloatRect Player::GetAABB() {
-	return m_AABB;
-}
-
-bool Player::IsAlive() { return m_alive; }
-
 void Player::AddScore(int score) { m_score += score; }
 
-int Player::GetScore() { return m_score; }
-
 void Player::UpdateAABB() {
-	m_AABB = sf::FloatRect(
-		m_position.x - m_sprite.getTexture()->getSize().x / 2,
-		m_position.y - m_sprite.getTexture()->getSize().y / 2,
-		m_sprite.getTexture()->getSize().x,
-		m_sprite.getTexture()->getSize().y);
+	m_rect = sf::FloatRect(
+		m_position.x - m_rectSize.x / 2,
+		m_position.y - m_rectSize.y / 2,
+		m_rectSize.x,
+		m_rectSize.y);
+	m_hitbox = sf::FloatRect(
+		m_position.x - m_hitboxSize.x / 2,
+		m_position.y - m_hitboxSize.y / 2,
+		m_hitboxSize.x,
+		m_hitboxSize.y);
 }
 
 void Player::HandleInput() {
@@ -95,14 +88,25 @@ void Player::HandleInput() {
 }
 
 void Player::EnforceWorldBoundary() {
-	// TODO make this less bad
-	float offsetX = 8 + m_sprite.getTextureRect().width / 2;
-	float offsetY = 8 + m_sprite.getTextureRect().height / 2;
+	sf::Vector2f worldSize = m_context->m_world->GetSize();
+	float thickness = m_context->m_world->GetWallThickness();
 
-	if (m_position.x > m_context->m_window->getSize().x - offsetX)
-		m_position.x = m_context->m_window->getSize().x - offsetX;
-	if (m_position.y > m_context->m_window->getSize().y - offsetY)
-		m_position.y = m_context->m_window->getSize().y - offsetY;
-	if (m_position.x < offsetX) m_position.x = offsetX;
-	if (m_position.y < offsetY) m_position.y = offsetY;
+	if (m_position.x < thickness + m_rectSize.x / 2)
+		m_position.x = thickness + m_rectSize.x / 2;
+	if (m_position.y < thickness + m_rectSize.y / 2)
+		m_position.y = thickness + m_rectSize.y / 2;
+	if (m_position.x > worldSize.x - thickness - m_rectSize.x / 2)
+		m_position.x = worldSize.x - thickness - m_rectSize.x / 2;
+	if (m_position.y > worldSize.y - thickness - m_rectSize.y / 2)
+		m_position.y = worldSize.y - thickness - m_rectSize.y / 2;
 }
+
+// getters
+sf::Vector2f Player::GetPosition() { return m_position; }
+sf::FloatRect Player::GetRect() { return m_rect; }
+sf::FloatRect Player::GetHitbox() { return m_hitbox; }
+int Player::GetScore() { return m_score; }
+bool Player::IsAlive() { return m_alive; }
+
+// setters
+void Player::SetPosition(sf::Vector2f pos) { m_position = pos; }

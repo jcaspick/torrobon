@@ -93,16 +93,16 @@ void EntityManager::RemoveDead() {
 
 void EntityManager::CheckPlayerCollision() {
 	if (!m_context->m_player->IsAlive()) return;
-	sf::FloatRect playerAABB = m_context->m_player->GetAABB();
+	sf::FloatRect playerHitbox = m_context->m_player->GetHitbox();
 	for (auto itr : m_entities) {
-		if (itr->GetRect().intersects(playerAABB)) {
+		if (itr->GetRect().intersects(playerHitbox)) {
 			m_context->m_effectManager->BigExplosion(
 				m_context->m_player->GetPosition());
 			m_context->m_player->Kill();
 		}
 	}
 	for (auto itr2 : m_bullets) {
-		if (itr2->GetRect().intersects(playerAABB)) {
+		if (itr2->GetRect().intersects(playerHitbox)) {
 			m_context->m_effectManager->BigExplosion(
 				m_context->m_player->GetPosition());
 			m_context->m_player->Kill();
@@ -113,4 +113,3 @@ void EntityManager::CheckPlayerCollision() {
 // getters
 Context* EntityManager::GetContext() { return m_context; }
 std::vector<Entity*>* EntityManager::GetEntities() { return &m_entities; }
-
