@@ -17,6 +17,7 @@ public:
 	void SetSpeed(float speed);
 	void SetPosition(const sf::Vector2f& pos);
 	void SetDirection(const sf::Vector2f& dir);
+	void SetActive(bool active);
 	float GetSpeed();
 	bool IsActive();
 	sf::Vector2f GetPosition();

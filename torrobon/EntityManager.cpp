@@ -25,8 +25,19 @@ void EntityManager::Update(float dt) {
 	for (int i = 0; i < m_entities.size(); ++i) {
 		m_entities[i]->Update(dt);
 	}
+	sf::Vector2f worldSize = m_context->m_world->GetSize();
+	sf::Vector2f bulletPos;
+	float thickness = m_context->m_world->GetWallThickness();
 	for (int j = 0; j < m_bullets.size(); ++j) {
 		m_bullets[j]->Update(dt);
+		bulletPos = m_bullets[j]->GetPosition();
+		if (bulletPos.x > worldSize.x - thickness ||
+			bulletPos.y > worldSize.y - thickness ||
+			bulletPos.x < thickness ||
+			bulletPos.y < thickness) 
+		{
+			m_bullets[j]->SetActive(false);
+		}
 	}
 	CheckPlayerCollision();
 	RemoveDead();

@@ -42,6 +42,7 @@ void EnemyBullet::UpdateRect() {
 void EnemyBullet::SetSpeed(float speed) { m_speed = speed; }
 void EnemyBullet::SetPosition(const sf::Vector2f& pos) { m_position = pos; }
 void EnemyBullet::SetDirection(const sf::Vector2f& dir) { m_direction = dir; }
+void EnemyBullet::SetActive(bool active) { m_active = active; }
 
 // getters
 bool EnemyBullet::IsActive() { return m_active; }
