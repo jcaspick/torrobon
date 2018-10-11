@@ -88,7 +88,6 @@ void EntityManager::RemoveDead() {
 	for (int i = m_entities.size() - 1; i >= 0; --i) {
 		if (m_entities[i]->GetHealth() <= 0) {
 			m_entities[i]->OnDeath();
-			m_context->m_effectManager->BigExplosion(m_entities[i]->GetPosition());
 			delete m_entities[i];
 			m_entities.erase(m_entities.begin() + i);
 		}
@@ -107,15 +106,15 @@ void EntityManager::CheckPlayerCollision() {
 	sf::FloatRect playerHitbox = m_context->m_player->GetHitbox();
 	for (auto itr : m_entities) {
 		if (itr->GetRect().intersects(playerHitbox)) {
-			m_context->m_effectManager->BigExplosion(
-				m_context->m_player->GetPosition());
+			m_context->m_effectManager->CreateEffect(
+				EffectType::BigExplosion, m_context->m_player->GetPosition());
 			m_context->m_player->Kill();
 		}
 	}
 	for (auto itr2 : m_bullets) {
 		if (itr2->GetRect().intersects(playerHitbox)) {
-			m_context->m_effectManager->BigExplosion(
-				m_context->m_player->GetPosition());
+			m_context->m_effectManager->CreateEffect(
+				EffectType::BigExplosion, m_context->m_player->GetPosition());
 			m_context->m_player->Kill();
 		}
 	}

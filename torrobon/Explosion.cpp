@@ -21,3 +21,7 @@ void Explosion::Draw(sf::RenderWindow* window) {
 void Explosion::SetAnimation(const std::string& name) {
 	m_sprite.SetAnimation(name);
 }
+
+void Explosion::SetPosition(const sf::Vector2f& pos) {
+	m_sprite.SetPosition(pos);
+}

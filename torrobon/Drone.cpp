@@ -34,6 +34,8 @@ void Drone::Draw() {
 
 void Drone::OnDeath() {
 	m_context->m_player->AddScore(1);
+	m_context->m_effectManager->CreateEffect(
+		EffectType::BigExplosion, m_position);
 }
 
 void Drone::ChooseDirection() {

@@ -9,7 +9,7 @@ Stompy::Stompy(Context* context) :
 	m_spriteSheet("config/stompy.cfg"),
 	m_shotInterval(0.2f)
 {
-	m_health = 50;
+	m_health = 75;
 	m_rectSize = { 90, 96 };
 }
 
@@ -21,8 +21,8 @@ void Stompy::Update(float dt) {
 	switch (m_mode)
 	{
 	case Stompy::Mode::Waiting:
-		if (m_elapsed > 0.8f) {
-			m_elapsed -= 0.8f;
+		if (m_elapsed > 0.4f) {
+			m_elapsed -= 0.4f;
 			ChooseDirection();
 			m_pauses++;
 			m_mode = Mode::Chasing;
@@ -32,7 +32,7 @@ void Stompy::Update(float dt) {
 	case Stompy::Mode::Chasing:
 		if (m_elapsed > 1.5f) {
 			m_elapsed -= 1.5f;
-			if (m_pauses >= 3) {
+			if (m_pauses >= 2) {
 				m_pauses = 0;
 				m_mode = Mode::Shooting;
 			}
@@ -52,8 +52,8 @@ void Stompy::Update(float dt) {
 				Utils::Normalize(m_context->m_player->GetPosition() - m_position), 
 				300);
 		}
-		if (m_elapsed > 3.0f) {
-			m_elapsed -= 3.0f;
+		if (m_elapsed > 2.0f) {
+			m_elapsed -= 2.0f;
 			m_shotTimer = 0.0f;
 			m_mode = Mode::Chasing;
 		}
@@ -71,6 +71,8 @@ void Stompy::Draw() {
 
 void Stompy::OnDeath() {
 	m_context->m_player->AddScore(10);
+	m_context->m_effectManager->CreateEffect(
+		EffectType::BigExplosion, m_position);
 }
 
 void Stompy::ChooseDirection() {

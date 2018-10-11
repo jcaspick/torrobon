@@ -14,6 +14,7 @@ public:
 	void Update(float dt);
 	void Draw(sf::RenderWindow* window);
 	void SetAnimation(const std::string& name);
+	void SetPosition(const sf::Vector2f& pos);
 
 private:
 	EffectManager* m_effectMgr;

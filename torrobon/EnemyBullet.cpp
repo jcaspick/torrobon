@@ -25,7 +25,10 @@ void EnemyBullet::Draw() {
 	m_context->m_window->draw(m_sprite);
 }
 
-void EnemyBullet::OnDeath() {}
+void EnemyBullet::OnDeath() {
+	m_context->m_effectManager->CreateEffect(
+		EffectType::SmallRedExplosion2, m_position);
+}
 
 void EnemyBullet::Move(const sf::Vector2f& delta) {
 	m_position += delta;

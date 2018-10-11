@@ -3,7 +3,37 @@
 
 EffectManager::EffectManager(Context* context) :
 	m_context(context)
-{}
+{
+	// factory definitions
+	m_effectFactory[EffectType::BigExplosion] = [this]() {
+		Explosion* explosion = new Explosion(this, "config/bigExplosion.cfg");
+		explosion->SetAnimation("explode");
+		return explosion; };
+	m_effectFactory[EffectType::SmallBlueExplosion1] = [this]() {
+		Explosion* explosion = new Explosion(this, "config/smallExplosions.cfg");
+		explosion->SetAnimation("blue1");
+		return explosion; };
+	m_effectFactory[EffectType::SmallBlueExplosion2] = [this]() {
+		Explosion* explosion = new Explosion(this, "config/smallExplosions.cfg");
+		explosion->SetAnimation("blue2");
+		return explosion; };
+	m_effectFactory[EffectType::SmallRedExplosion1] = [this]() {
+		Explosion* explosion = new Explosion(this, "config/smallExplosions.cfg");
+		explosion->SetAnimation("red1");
+		return explosion; };
+	m_effectFactory[EffectType::SmallRedExplosion2] = [this]() {
+		Explosion* explosion = new Explosion(this, "config/smallExplosions.cfg");
+		explosion->SetAnimation("red2");
+		return explosion; };
+	m_effectFactory[EffectType::SmallYellowExplosion1] = [this]() {
+		Explosion* explosion = new Explosion(this, "config/smallExplosions.cfg");
+		explosion->SetAnimation("orange1");
+		return explosion; };
+	m_effectFactory[EffectType::SmallYellowExplosion2] = [this]() {
+		Explosion* explosion = new Explosion(this, "config/smallExplosions.cfg");
+		explosion->SetAnimation("orange2");
+		return explosion; };
+}
 
 EffectManager::~EffectManager() { Purge(); }
 
@@ -21,40 +51,8 @@ void EffectManager::Draw() {
 }
 
 void EffectManager::CreateEffect(EffectType type, sf::Vector2f pos) {
-	/*switch (type)
-	{
-	case EffectType::BigExplosion:
-		break;
-	case EffectType::SmallYellowExplosion1:
-		Explosion* explosion = new Explosion(this, "config/bigExposion.cfg");
-		explosion->m_sprite.SetPosition(pos);
-		explosion->SetAnimation("orange1");
-		m_explosions.emplace_back(explosion);
-		break;
-	case EffectType::SmallYellowExplosion2:
-		break;
-	case EffectType::SmallBlueExplosion1:
-		break;
-	case EffectType::SmallBlueExplosion2:
-		break;
-	case EffectType::SmallRedExplosion1:
-		break;
-	case EffectType::SmallRedExplosion2:
-		break;
-	default:
-		break;
-	}*/
-
-	Explosion* explosion = new Explosion(this, "config/smallExplosions.cfg");
-	explosion->m_sprite.SetPosition(pos);
-	explosion->SetAnimation("orange1");
-	m_explosions.emplace_back(explosion);
-}
-
-void EffectManager::BigExplosion(sf::Vector2f pos) {
-	Explosion* explosion = new Explosion(this, "config/bigExplosion.cfg");
-	explosion->m_sprite.SetPosition(pos);
-	explosion->SetAnimation("explode");
+	Explosion* explosion = m_effectFactory[type]();
+	explosion->SetPosition(pos);
 	m_explosions.emplace_back(explosion);
 }
 

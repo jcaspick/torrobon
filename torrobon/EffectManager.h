@@ -2,6 +2,8 @@
 #ifndef EFFECT_MANAGER
 #define EFFECT_MANAGER
 #include "Explosion.h"
+#include <unordered_map>
+#include <functional>
 
 enum class EffectType {
 	BigExplosion,
@@ -13,6 +15,8 @@ enum class EffectType {
 	SmallRedExplosion2
 };
 
+using EffectFactory = std::unordered_map<EffectType, std::function<Explosion*(void)>>;
+
 struct Context;
 class EffectManager {
 
@@ -23,7 +27,6 @@ public:
 	void Update(float dt);
 	void Draw();
 	void CreateEffect(EffectType type, sf::Vector2f pos);
-	void BigExplosion(sf::Vector2f pos);
 
 private:
 	void Purge();
@@ -31,6 +34,7 @@ private:
 
 	Context* m_context;
 	std::vector<Explosion*> m_explosions;
+	EffectFactory m_effectFactory;
 };
 
 #endif // !EFFECT_MANAGER;
