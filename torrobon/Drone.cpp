@@ -40,6 +40,12 @@ void Drone::OnDeath() {
 		EffectType::BigExplosion, m_position);
 }
 
+void Drone::OnPlayerCollision(sf::FloatRect intersection) {
+	m_context->m_effectManager->CreateEffect(
+		EffectType::BigExplosion, m_context->m_player->GetPosition());
+	m_context->m_player->Kill();
+}
+
 void Drone::ChooseDirection() {
 	sf::Vector2f goal = m_context->m_player->GetPosition();
 	if (abs(goal.x - m_position.x)

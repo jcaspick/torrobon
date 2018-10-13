@@ -23,6 +23,7 @@ public:
 	virtual void Update(float dt) = 0;
 	virtual void Draw() = 0;
 	virtual void OnDeath();
+	virtual void OnPlayerCollision(sf::FloatRect intersection);
 	void AddDamage(const float& damage);
 	void Move(const sf::Vector2f& delta);
 

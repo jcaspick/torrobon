@@ -11,6 +11,7 @@ public:
 	~Gem();
 	void Update(float dt);
 	void Draw();
+	void OnPlayerCollision(sf::FloatRect intersection);
 
 private:
 	SpriteSheet m_sprite;

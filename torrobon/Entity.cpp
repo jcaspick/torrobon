@@ -19,6 +19,7 @@ void Entity::Move(const sf::Vector2f& delta) {
 }
 
 void Entity::OnDeath() {}
+void Entity::OnPlayerCollision(sf::FloatRect intersection) {}
 
 // setters
 void Entity::SetPosition(const sf::Vector2f& pos) { m_position = pos; }

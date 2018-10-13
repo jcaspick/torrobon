@@ -19,6 +19,7 @@ public:
 	void Update(float dt);
 	void Draw();
 	void OnDeath();
+	void OnPlayerCollision(sf::FloatRect intersection);
 
 private:
 	void ChooseDirection();

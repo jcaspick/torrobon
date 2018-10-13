@@ -76,6 +76,34 @@ void Stompy::OnDeath() {
 		EffectType::BigExplosion, m_position);
 }
 
+void Stompy::OnPlayerCollision(sf::FloatRect intersection) {
+	sf::Vector2f playerPos = m_context->m_player->GetPosition();
+	if (intersection.width > intersection.height) {
+		if (m_position.y > playerPos.y) {
+			m_context->m_player->SetPosition({
+				playerPos.x,
+				playerPos.y - intersection.height });
+		}
+		else {
+			m_context->m_player->SetPosition({
+				playerPos.x,
+				playerPos.y + intersection.height });
+		}
+	}
+	else {
+		if (m_position.x > playerPos.x) {
+			m_context->m_player->SetPosition({
+				playerPos.x - intersection.width,
+				playerPos.y });
+		}
+		else {
+			m_context->m_player->SetPosition({
+				playerPos.x + intersection.width,
+				playerPos.y});
+		}
+	}
+}
+
 void Stompy::ChooseDirection() {
 	sf::Vector2f playerPos = m_context->m_player->GetPosition();
 	float rotation = Utils::Vec2Rot(playerPos - m_position);

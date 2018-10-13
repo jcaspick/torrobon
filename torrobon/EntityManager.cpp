@@ -107,11 +107,12 @@ void EntityManager::RemoveDead() {
 void EntityManager::CheckPlayerCollision() {
 	if (!m_context->m_player->IsAlive()) return;
 	sf::FloatRect playerHitbox = m_context->m_player->GetHitbox();
+	sf::FloatRect playerRect = m_context->m_player->GetRect();
+	sf::FloatRect intersection;
+
 	for (auto itr : m_entities) {
-		if (itr->GetRect().intersects(playerHitbox)) {
-			m_context->m_effectManager->CreateEffect(
-				EffectType::BigExplosion, m_context->m_player->GetPosition());
-			m_context->m_player->Kill();
+		if (itr->GetRect().intersects(playerHitbox, intersection)) {
+			itr->OnPlayerCollision(intersection);
 		}
 	}
 	for (auto itr2 : m_bullets) {

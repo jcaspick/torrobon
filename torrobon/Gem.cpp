@@ -20,3 +20,8 @@ void Gem::Update(float dt) {
 void Gem::Draw() {
 	m_sprite.Draw(m_context->m_window);
 }
+
+void Gem::OnPlayerCollision(sf::FloatRect intersection) {
+	m_context->m_player->AddScore(1);
+	m_health = 0;
+}
