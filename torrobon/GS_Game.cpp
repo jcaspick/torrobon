@@ -64,7 +64,7 @@ void GS_Game::Update(float dt) {
 
 	// enemy spawning logic
 	m_spawnTimer += dt;
-	/*while (m_spawnTimer > m_spawnInterval) {
+	while (m_spawnTimer > m_spawnInterval) {
 		m_spawnTimer -= m_spawnInterval;
 
 		float spawnX = rand() % (int)m_stateMgr->GetContext()->
@@ -84,7 +84,7 @@ void GS_Game::Update(float dt) {
 
 		m_stateMgr->GetContext()->m_entityManager->
 			Spawn(EntityType::Drone, { spawnX, spawnY });
-	}*/
+	}
 
 	// difficulty increase + stompy spawn
 	m_difficultyTimer += dt;
