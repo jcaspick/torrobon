@@ -135,6 +135,7 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gem.cpp" />
     <ClCompile Include="GS_Game.cpp" />
     <ClCompile Include="GS_GameOver.cpp" />
     <ClCompile Include="GS_Menu.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Gem.h" />
     <ClInclude Include="GS_Game.h" />
     <ClInclude Include="GS_GameOver.h" />
     <ClInclude Include="GS_Menu.h" />
@@ -176,6 +178,7 @@
     <None Include="config\bot1.cfg" />
     <None Include="config\bot2.cfg" />
     <None Include="config\directionalBullet.cfg" />
+    <None Include="config\gem.cfg" />
     <None Include="config\smallExplosions.cfg" />
     <None Include="config\stompy.cfg" />
     <None Include="config\textures.cfg" />

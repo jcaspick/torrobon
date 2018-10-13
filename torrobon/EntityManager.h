@@ -7,6 +7,7 @@
 #include <functional>
 
 enum class EntityType {
+	Gem,
 	Drone,
 	Stompy
 };

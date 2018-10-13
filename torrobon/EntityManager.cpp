@@ -3,6 +3,7 @@
 #include "Context.h"
 
 // entity classes
+#include "Gem.h"
 #include "Drone.h"
 #include "Stompy.h"
 #include "EnemyBullet.h"
@@ -11,6 +12,8 @@ EntityManager::EntityManager(Context* context) :
 	m_context(context)
 {
 	// factory definitions
+	m_entityFactory[EntityType::Gem] = [this]() -> Entity* {
+		return new Gem(this->GetContext()); };
 	m_entityFactory[EntityType::Drone] = [this]() -> Entity* {
 		return new Drone(this->GetContext()); };
 	m_entityFactory[EntityType::Stompy] = [this]() -> Entity* {
