@@ -11,6 +11,7 @@ Drone::Drone(Context* context) :
 	m_rectOffset = { 0, 12 };
 	m_spriteSheet.SetScale({ 2, 2 });
 	m_health = 5;
+	m_collisionMask = c_Player | c_Bullets;
 }
 
 Drone::~Drone() {}
@@ -34,6 +35,7 @@ void Drone::Draw() {
 
 void Drone::OnDeath() {
 	m_context->m_player->AddScore(1);
+	m_context->m_entityManager->Spawn(EntityType::Gem, m_position);
 	m_context->m_effectManager->CreateEffect(
 		EffectType::BigExplosion, m_position);
 }

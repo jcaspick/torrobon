@@ -8,6 +8,11 @@ enum class Anchor {
 	Bottom
 };
 
+enum CollisionMask {
+	c_Player  = 1u << 0,
+	c_Bullets = 1u << 1
+};
+
 struct Context;
 class Entity {
 
@@ -30,6 +35,7 @@ public:
 	sf::Vector2f GetCollisionOffset();
 	sf::FloatRect GetRect();
 	float GetHealth();
+	unsigned int GetCollisionMask();
 
 protected:
 	void UpdateRect();
@@ -39,6 +45,7 @@ protected:
 	sf::Vector2f m_rectSize;
 	sf::Vector2f m_rectOffset;
 	Anchor m_rectAnchor;
+	unsigned int m_collisionMask;
 	sf::FloatRect m_rect;
 	float m_health;
 };

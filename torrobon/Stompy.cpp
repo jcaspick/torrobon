@@ -11,6 +11,7 @@ Stompy::Stompy(Context* context) :
 {
 	m_health = 75;
 	m_rectSize = { 90, 96 };
+	m_collisionMask = c_Player | c_Bullets;
 }
 
 Stompy::~Stompy() {}

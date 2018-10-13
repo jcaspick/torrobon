@@ -31,6 +31,7 @@ sf::Vector2f Entity::GetCollisionSize() { return m_rectSize; }
 sf::Vector2f Entity::GetCollisionOffset() { return m_rectOffset; }
 sf::FloatRect Entity::GetRect() { return m_rect; }
 float Entity::GetHealth() { return m_health; }
+unsigned int Entity::GetCollisionMask() { return m_collisionMask; }
 
 void Entity::UpdateRect() {
 	float posX, posY;

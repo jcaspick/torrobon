@@ -59,7 +59,8 @@ void BulletManager::CheckCollisions() {
 
 	for (auto itr : m_bullets) {
 		for (auto itr2 : enemies) {
-			if (itr->m_AABB.intersects(itr2->GetRect())) {
+			if ((itr2->GetCollisionMask() & CollisionMask::c_Bullets) == CollisionMask::c_Bullets && 
+				itr->m_AABB.intersects(itr2->GetRect())) {
 				m_context->m_effectManager->
 					CreateEffect(EffectType::SmallYellowExplosion1, itr->m_position);
 				itr2->AddDamage(1);
