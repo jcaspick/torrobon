@@ -111,7 +111,7 @@ void EntityManager::CheckPlayerCollision() {
 	sf::FloatRect intersection;
 
 	for (auto itr : m_entities) {
-		if (itr->GetRect().intersects(playerHitbox, intersection)) {
+		if (itr->GetRect().intersects(playerRect, intersection)) {
 			itr->OnPlayerCollision(intersection);
 		}
 	}

@@ -2,6 +2,7 @@
 #include "Context.h"
 #include "Utilities.h"
 #include "EnemyBullet.h"
+#include <iostream>
 
 Stompy::Stompy(Context* context) :
 	Entity(context),
@@ -77,6 +78,17 @@ void Stompy::OnDeath() {
 }
 
 void Stompy::OnPlayerCollision(sf::FloatRect intersection) {
+	sf::FloatRect playerRect = m_context->m_player->GetRect();
+	if (intersection.height >= playerRect.height * 0.6f &&
+		intersection.width >= playerRect.width * 0.6f)
+	{
+		m_context->m_effectManager->CreateEffect(
+			EffectType::BigExplosion, m_context->m_player->GetPosition());
+		m_context->m_player->Kill();
+		return;
+	}
+
+	// player is moved out of the way
 	sf::Vector2f playerPos = m_context->m_player->GetPosition();
 	if (intersection.width > intersection.height) {
 		if (m_position.y > playerPos.y) {
