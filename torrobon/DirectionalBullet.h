@@ -14,6 +14,7 @@ public:
 
 	void Update(float dt);
 	void Draw();
+	void OnDeath();
 
 private:
 	DirectionalSprite m_sprite;

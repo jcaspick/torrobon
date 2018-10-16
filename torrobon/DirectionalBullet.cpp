@@ -24,3 +24,8 @@ void DirectionalBullet::Update(float dt) {
 void DirectionalBullet::Draw() {
 	m_sprite.Draw(m_context->m_window);
 }
+
+void DirectionalBullet::OnDeath() {
+	m_context->m_effectManager->
+		CreateEffect(EffectType::SmallYellowExplosion1, m_position);
+}

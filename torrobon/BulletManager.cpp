@@ -20,11 +20,14 @@ void BulletManager::Update(float dt) {
 
 	for (auto &itr : m_playerBullets) {
 		itr->Update(dt);
-		if (itr->GetPosition().x < thickness ||
-			itr->GetPosition().x > worldSize.x - thickness ||
-			itr->GetPosition().y < thickness ||
-			itr->GetPosition().y > worldSize.y - thickness)
-		{
+		if (!m_context->m_world->IsInBounds(itr->GetPosition())) {
+			itr->SetAlive(false);
+		}
+	}
+
+	for (auto &itr : m_enemyBullets) {
+		itr->Update(dt);
+		if (!m_context->m_world->IsInBounds(itr->GetPosition())) {
 			itr->SetAlive(false);
 		}
 	}
@@ -76,8 +79,6 @@ void BulletManager::CheckCollisions() {
 		for (auto itr2 : enemies) {
 			if ((itr2->GetCollisionMask() & CollisionMask::c_Bullets) == CollisionMask::c_Bullets &&
 				itr->GetRect().intersects(itr2->GetRect())) {
-				m_context->m_effectManager->
-					CreateEffect(EffectType::SmallYellowExplosion1, itr->GetPosition());
 				itr2->AddDamage(1);
 				itr->SetAlive(false);
 			}
@@ -88,12 +89,14 @@ void BulletManager::CheckCollisions() {
 void BulletManager::RemoveDeadBullets() {
 	for (int i = m_playerBullets.size() - 1; i >= 0; --i) {
 		if (!m_playerBullets[i]->IsAlive()) {
+			m_playerBullets[i]->OnDeath();
 			delete m_playerBullets[i];
 			m_playerBullets.erase(m_playerBullets.begin() + i);
 		}
 	}
 	for (int i = m_enemyBullets.size() - 1; i >= 0; --i) {
 		if (!m_enemyBullets[i]->IsAlive()) {
+			m_enemyBullets[i]->OnDeath();
 			delete m_enemyBullets[i];
 			m_enemyBullets.erase(m_enemyBullets.begin() + i);
 		}

@@ -12,6 +12,7 @@ public:
 
 	virtual void Update(float dt);
 	virtual void Draw() = 0;
+	virtual void OnDeath();
 	void Move(sf::Vector2f delta);
 
 	void SetPosition(sf::Vector2f pos);

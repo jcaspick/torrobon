@@ -16,6 +16,8 @@ void Bullet::Update(float dt) {
 	UpdateRect();
 }
 
+void Bullet::OnDeath() {}
+
 void Bullet::Move(sf::Vector2f delta) {
 	SetPosition(m_position + delta);
 }
