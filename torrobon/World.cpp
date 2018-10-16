@@ -23,6 +23,17 @@ void World::Draw(sf::RenderWindow* window) {
 	window->draw(wallV);
 }
 
+bool World::IsInBounds(sf::Vector2f point) {
+	if (point.x > m_size.x - m_wallThickness ||
+		point.y > m_size.y - m_wallThickness ||
+		point.x < m_wallThickness ||
+		point.y < m_wallThickness)
+	{
+		return false;
+	}
+	return true;
+}
+
 // getters
 sf::Vector2f World::GetSize() { return m_size; }
 float World::GetWallThickness() { return m_wallThickness; }

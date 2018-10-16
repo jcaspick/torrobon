@@ -10,6 +10,7 @@ public:
 	~World();
 
 	void Draw(sf::RenderWindow* window);
+	bool IsInBounds(sf::Vector2f point);
 	sf::Vector2f GetSize();
 	float GetWallThickness();
 	
