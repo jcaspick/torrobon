@@ -30,8 +30,23 @@ public:
 		float rot, 
 		float speed,
 		float inaccuracy = 0);
-	//void BulletCircle(bool player, BulletType type, sf::Vector2f pos, int num, float rotOffset, float fOffset = 0);
-	//void BulletArc(bool player, BulletType type, sf::Vector2f pos, float rot, int num, float angle, float fOffset = 0);
+	void BulletCircle(
+		bool player, 
+		BulletType type, 
+		sf::Vector2f pos, 
+		float speed,
+		int num, 
+		float rotOffset, 
+		float fOffset = 0);
+	void BulletArc(
+		bool player, 
+		BulletType type, 
+		sf::Vector2f pos, 
+		float rot,
+		float speed,
+		int num, 
+		float angle, 
+		float fOffset = 0);
 
 private:
 	void Purge();

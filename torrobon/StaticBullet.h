@@ -6,11 +6,13 @@
 class StaticBullet : public Bullet {
 
 public:
-	StaticBullet(Context* context, sf::Vector2f pos, sf::Vector2f dir, float speed, std::string& texture);
+	StaticBullet(Context* context, sf::Vector2f pos, sf::Vector2f dir, 
+		float speed, const std::string& texture);
 	~StaticBullet();
 
 	void Update(float dt);
 	void Draw();
+	void OnDeath();
 
 private:
 	sf::Sprite m_sprite;

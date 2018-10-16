@@ -8,7 +8,7 @@ Stompy::Stompy(Context* context) :
 	Entity(context),
 	m_mode(Mode::Waiting),
 	m_spriteSheet("config/stompy.cfg"),
-	m_shotInterval(0.2f)
+	m_shotInterval(0.4f)
 {
 	m_health = 75;
 	m_rectSize = { 90, 96 };
@@ -49,10 +49,9 @@ void Stompy::Update(float dt) {
 		m_shotTimer += dt;
 		if (m_shotTimer > m_shotInterval) {
 			m_shotTimer -= m_shotInterval;
-			m_context->m_entityManager->SpawnBullet(
-				m_position, 
-				Utils::Normalize(m_context->m_player->GetPosition() - m_position), 
-				300);
+			m_context->m_bulletManager->BulletCircle(
+				false, BulletType::StaticRed, m_position,
+				150, 32, m_elapsed * 45, 16);
 		}
 		if (m_elapsed > 2.0f) {
 			m_elapsed -= 2.0f;
