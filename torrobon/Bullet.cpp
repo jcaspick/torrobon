@@ -1,51 +1,41 @@
 #include "Bullet.h"
-#include "Utilities.h"
-#include "BulletManager.h"
 #include "Context.h"
-#include "TextureHolder.h"
 
-Bullet::Bullet(BulletManager* bulletMgr) :
-	m_bulletMgr(bulletMgr),
-	m_speed(900),
-	m_hitRadius(6),
-	m_sprite(m_bulletMgr->GetContext()->m_textureHolder),
-	m_deleteFlag(false)
-{
-	m_sprite.LoadConfig("config/directionalBullet.cfg");
-}
+Bullet::Bullet(Context* context, sf::Vector2f pos, sf::Vector2f dir, float speed) :
+	m_context(context),
+	m_position(pos),
+	m_direction(dir),
+	m_speed(speed),
+	m_alive(true)
+{}
 
-Bullet::~Bullet() {};
+Bullet::~Bullet() {}
 
 void Bullet::Update(float dt) {
-	SetPosition({
-		m_position.x + m_direction.x * m_speed * dt,
-		m_position.y + m_direction.y * m_speed * dt
-	});
-	m_sprite.SetPosition(m_position);
-	UpdateAABB();
+	Move(m_direction * m_speed * dt);
+	UpdateRect();
 }
 
-void Bullet::Draw(sf::RenderWindow* window) {
-	m_sprite.Draw(window);
-	/*sf::RectangleShape debug({ m_hitRadius * 2, m_hitRadius * 2 });
-	debug.setPosition(m_position - sf::Vector2f(m_hitRadius, m_hitRadius));
-	debug.setFillColor(sf::Color::Red);
-	window->draw(debug);*/
+void Bullet::Move(sf::Vector2f delta) {
+	SetPosition(m_position + delta);
 }
 
-void Bullet::SetPosition(sf::Vector2f pos) {
-	m_position = pos;
+void Bullet::UpdateRect() {
+	m_rect = sf::FloatRect(
+		m_position.x - m_rectSize.x / 2,
+		m_position.y - m_rectSize.y / 2,
+		m_rectSize.x,
+		m_rectSize.y);
 }
 
-void Bullet::SetDirection(float degrees) {
-	m_direction = Utils::Rot2Vec(degrees);
-	m_sprite.SetDirection(degrees);
-}
+// setters
+void Bullet::SetPosition(sf::Vector2f pos) { m_position = pos; }
+void Bullet::SetDirection(sf::Vector2f dir) { m_direction = dir; }
+void Bullet::SetAlive(bool alive) { m_alive = alive; }
+void Bullet::SetSpeed(float speed) { m_speed = speed; }
 
-void Bullet::UpdateAABB() {
-	m_AABB = sf::FloatRect(
-		m_position.x - m_hitRadius,
-		m_position.y - m_hitRadius,
-		m_hitRadius * 2,
-		m_hitRadius * 2);
-}
+// getters
+sf::Vector2f Bullet::GetPosition() { return m_position; }
+sf::Vector2f Bullet::GetDirection() { return m_direction; }
+sf::FloatRect Bullet::GetRect() { return m_rect; }
+bool Bullet::IsAlive() { return m_alive; }

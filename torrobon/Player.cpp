@@ -26,9 +26,9 @@ void Player::Update(float dt) {
 	m_elapsed += dt;
 	if (m_elapsed >= m_shotInterval) {
 		if (m_shooting) {
-			m_context->m_bulletManager->CreateBullet(
-				m_position, 
-				Utils::Vec2Rot(m_mousePos - m_position));
+			m_context->m_bulletManager->AimedBullet(
+				true, BulletType::PlayerBasic, m_position,
+				Utils::Vec2Rot(m_mousePos - m_position), 800.0f, 2.0f);
 			m_elapsed = 0;
 		}
 	}

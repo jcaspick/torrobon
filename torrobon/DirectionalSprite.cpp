@@ -55,3 +55,8 @@ void DirectionalSprite::LoadConfig(const std::string& path) {
 	}
 	config.close();
 }
+
+// setters
+
+// getters
+sf::Vector2i DirectionalSprite::GetFrameSize() { return m_frameSize; }

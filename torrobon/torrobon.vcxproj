@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletManager.cpp" />
+    <ClCompile Include="DirectionalBullet.cpp" />
     <ClCompile Include="DirectionalSprite.cpp" />
     <ClCompile Include="Drone.cpp" />
     <ClCompile Include="EffectManager.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="StaticBullet.cpp" />
     <ClCompile Include="Stompy.cpp" />
     <ClCompile Include="TextureHolder.cpp" />
     <ClCompile Include="World.cpp" />
@@ -151,6 +153,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Context.h" />
+    <ClInclude Include="DirectionalBullet.h" />
     <ClInclude Include="DirectionalSprite.h" />
     <ClInclude Include="Drone.h" />
     <ClInclude Include="EffectManager.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="StaticBullet.h" />
     <ClInclude Include="Stompy.h" />
     <ClInclude Include="TextureHolder.h" />
     <ClInclude Include="Utilities.h" />

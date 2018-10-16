@@ -15,6 +15,8 @@ public:
 	void SetDirection(float degrees);
 	void SetPosition(sf::Vector2f pos);
 
+	sf::Vector2i GetFrameSize();
+
 private:
 	std::string m_texture;
 	sf::Sprite m_sprite;

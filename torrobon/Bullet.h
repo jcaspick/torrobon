@@ -1,35 +1,39 @@
 #pragma once
 #ifndef BULLET
 #define BULLET
-#include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics.hpp>
-#include "DirectionalSprite.h"
-struct Context;
 
-class BulletManager;
+struct Context;
 class Bullet {
-	friend class BulletManager;
 
 public:
-	Bullet(BulletManager* bulletMgr);
+	Bullet(Context* context, sf::Vector2f pos, sf::Vector2f dir, float speed);
 	~Bullet();
 
-	void Update(float dt);
-	void Draw(sf::RenderWindow* window);
-	void SetDirection(float degrees);
+	virtual void Update(float dt);
+	virtual void Draw() = 0;
+	void Move(sf::Vector2f delta);
+
 	void SetPosition(sf::Vector2f pos);
+	void SetDirection(sf::Vector2f dir);
+	void SetAlive(bool alive);
+	void SetSpeed(float speed);
 
-private:
-	void UpdateAABB();
+	sf::Vector2f GetPosition();
+	sf::Vector2f GetDirection();
+	sf::FloatRect GetRect();
+	bool IsAlive();
 
-	BulletManager* m_bulletMgr;
+protected:
+	void UpdateRect();
+
+	Context* m_context;
 	sf::Vector2f m_position;
-	float m_speed;
-	float m_hitRadius;
+	sf::Vector2f m_rectSize;
 	sf::Vector2f m_direction;
-	DirectionalSprite m_sprite;
-	sf::FloatRect m_AABB;
-	bool m_deleteFlag;
+	float m_speed;
+	sf::FloatRect m_rect;
+	bool m_alive;
 };
 
 #endif // !BULLET
