@@ -10,7 +10,7 @@ Drone::Drone(Context* context) :
 	m_rectSize = { 32, 40 };
 	m_rectOffset = { 0, 12 };
 	m_spriteSheet.SetScale({ 2, 2 });
-	m_health = 5;
+	m_health = 1;
 	m_collisionMask = c_Player | c_Bullets;
 }
 

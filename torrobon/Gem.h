@@ -15,6 +15,8 @@ public:
 
 private:
 	SpriteSheet m_sprite;
+	bool collected;
+	float m_speed;
 };
 
 #endif // !GEM

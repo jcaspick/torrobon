@@ -8,7 +8,7 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 	m_entityManager(m_stateMgr->GetContext()),
 	m_effectManager(m_stateMgr->GetContext()),
 	m_spawnTimer(12.0f),
-	m_spawnInterval(3.0f),
+	m_spawnInterval(1.0f),
 	m_difficultyTimer(0.0f),
 	m_difficultyInterval(10.0f),
 	m_debugView(m_stateMgr->GetContext())

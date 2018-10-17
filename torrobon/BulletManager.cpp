@@ -136,6 +136,7 @@ void BulletManager::CheckCollisions() {
 			m_context->m_effectManager->CreateEffect(
 				EffectType::BigExplosion, m_context->m_player->GetPosition());
 			m_context->m_player->Kill();
+			itr->SetAlive(false);
 		}
 	}
 }

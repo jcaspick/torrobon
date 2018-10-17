@@ -20,6 +20,7 @@ public:
 	sf::Vector2f GetPosition();
 	sf::FloatRect GetRect();
 	sf::FloatRect GetHitbox();
+	float GetCollectionRadius();
 	int GetScore();
 	bool IsAlive();
 
@@ -44,6 +45,8 @@ private:
 	sf::Vector2f m_rectSize;
 	sf::Vector2f m_hitboxSize;
 	float m_score;
+	float m_collectionRadius;
+	sf::CircleShape m_radius;
 };
 
 #endif // !PLAYER

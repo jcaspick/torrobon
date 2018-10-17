@@ -7,16 +7,22 @@ Player::Player(Context* context) :
 	m_speed(250.0f),
 	m_texture("player"),
 	m_elapsed(0),
-	m_shotInterval(0.05f),
+	m_shotInterval(0.03f),
 	m_alive(true),
 	m_rectSize(18, 32),
 	m_hitboxSize(6, 6)
 {
-	m_sprite.setTexture(*context->m_textureHolder->GetTexture(m_texture));
+	m_sprite.setTexture(*m_context->m_textureHolder->GetTexture(m_texture));
 	m_sprite.setOrigin(
 		m_sprite.getTexture()->getSize().x / 2,
 		m_sprite.getTexture()->getSize().y / 2);
 	m_sprite.setPosition(m_position);
+
+	m_radius.setFillColor(sf::Color::Transparent);
+	m_radius.setOutlineColor(sf::Color(255, 255, 255, 50));
+	m_radius.setOutlineThickness(1);
+	m_radius.setRadius(m_collectionRadius);
+	m_radius.setOrigin({ m_collectionRadius, m_collectionRadius });
 }
 
 Player::~Player() {}
@@ -28,8 +34,19 @@ void Player::Update(float dt) {
 		if (m_shooting) {
 			m_context->m_bulletManager->AimedBullet(
 				true, BulletType::PlayerBasic, m_position,
-				Utils::Vec2Rot(m_mousePos - m_position), 800.0f, 2.0f);
+				Utils::Vec2Rot(m_mousePos - m_position), 800.0f, 4.0f);
 			m_elapsed = 0;
+		}
+	}
+
+	if (!m_shooting) {
+		if (m_collectionRadius < 140) {
+			m_collectionRadius += dt * 150;
+		}
+	}
+	else {
+		if (m_collectionRadius > 1) {
+			m_collectionRadius -= dt * 600;
 		}
 	}
 
@@ -37,6 +54,10 @@ void Player::Update(float dt) {
 	m_position.x += m_deltaPos.x * dt * m_speed;
 	m_position.y += m_deltaPos.y * dt * m_speed;
 	m_sprite.setPosition(m_position);
+	m_radius.setPosition(m_position);
+	m_radius.setRadius(m_collectionRadius);
+	m_radius.setOrigin({ m_collectionRadius, m_collectionRadius });
+	m_radius.setOutlineColor(sf::Color(255, 255, 255, std::max(0.0f, m_collectionRadius - 50)));
 	EnforceWorldBoundary();
 	UpdateAABB();
 }
@@ -44,6 +65,7 @@ void Player::Update(float dt) {
 void Player::Draw() {
 	if (!m_alive) return;
 	m_context->m_window->draw(m_sprite);
+	m_context->m_window->draw(m_radius);
 }
 
 void Player::Kill() {
@@ -107,6 +129,7 @@ sf::FloatRect Player::GetRect() { return m_rect; }
 sf::FloatRect Player::GetHitbox() { return m_hitbox; }
 int Player::GetScore() { return m_score; }
 bool Player::IsAlive() { return m_alive; }
+float Player::GetCollectionRadius() { return m_collectionRadius; }
 
 // setters
 void Player::SetPosition(sf::Vector2f pos) { m_position = pos; }
