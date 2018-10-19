@@ -20,9 +20,8 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 
 	m_view = m_stateMgr->GetContext()->m_window->getDefaultView();
 
-	m_font.loadFromFile("fonts/BMjapan.TTF");
-	m_scoreText.setFont(m_font);
-	m_scoreText.setPosition(32, 32);
+	m_energyBar.setPosition({ m_view.getSize().x / 2 - 200, 50 });
+	m_energyBar.setOutlineThickness(1);
 }
 
 GS_Game::~GS_Game() {}
@@ -35,7 +34,7 @@ void GS_Game::OnCreate() {
 		m_stateMgr->GetContext()->m_world->GetSize().x / 2,
 		m_stateMgr->GetContext()->m_world->GetSize().y / 2 });
 
-	m_bg.setFillColor(sf::Color(90, 90, 90, 255));
+	m_bg.setFillColor(sf::Color(90, 0, 90, 255));
 	m_bg.setPosition({ 0,0 });
 	m_bg.setSize((sf::Vector2f)m_stateMgr->GetContext()->m_world->GetSize());
 }
@@ -108,14 +107,8 @@ void GS_Game::Update(float dt) {
 		m_gameOverTimer += dt;
 		if (m_gameOverTimer > 2) {
 			m_stateMgr->SetState(StateType::GameOver);
-			
 		}
 	}
-
-	// score counter
-	m_scoreText.setString("SCORE: " + 
-		std::to_string(m_stateMgr->GetContext()->
-			m_player->GetScore()));
 }
 
 void GS_Game::Draw() {
@@ -132,7 +125,16 @@ void GS_Game::Draw() {
 	// switch view to draw UI elements
 	m_stateMgr->GetContext()->m_window->setView(
 		m_stateMgr->GetContext()->m_window->getDefaultView());
-	m_stateMgr->GetContext()->m_window->draw(m_scoreText);
+
+	m_energyBar.setFillColor(sf::Color(0, 255, 0, 100));
+	m_energyBar.setOutlineColor(sf::Color::Transparent);
+	m_energyBar.setSize({ m_player->GetEnergy() * 4, 10 });
+	m_stateMgr->GetContext()->m_window->draw(m_energyBar);
+
+	m_energyBar.setFillColor(sf::Color::Transparent);
+	m_energyBar.setOutlineColor(sf::Color::Green);
+	m_energyBar.setSize({ 400, 10 });
+	m_stateMgr->GetContext()->m_window->draw(m_energyBar);
 
 	// switch back to preserve correct mouse coordinates
 	m_stateMgr->GetContext()->m_window->setView(m_view);

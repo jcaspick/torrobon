@@ -39,6 +39,7 @@ private:
 	sf::Font m_font;
 	sf::RectangleShape m_bg;
 	sf::View m_view;
+	sf::RectangleShape m_energyBar;
 
 	EntityDebugView m_debugView;
 };

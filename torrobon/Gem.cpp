@@ -37,6 +37,6 @@ void Gem::Draw() {
 }
 
 void Gem::OnPlayerCollision(sf::FloatRect intersection) {
-	m_context->m_player->AddScore(1);
+	m_context->m_player->AddEnergy(1);
 	m_health = 0;
 }

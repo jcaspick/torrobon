@@ -13,15 +13,15 @@ public:
 
 	void Update(float dt);
 	void Draw();
+	void AddEnergy(float energy);
 	void Kill();
-	void AddScore(int score);
 
 	void SetPosition(sf::Vector2f pos);
 	sf::Vector2f GetPosition();
 	sf::FloatRect GetRect();
 	sf::FloatRect GetHitbox();
 	float GetCollectionRadius();
-	int GetScore();
+	float GetEnergy();
 	bool IsAlive();
 
 private:
@@ -34,7 +34,6 @@ private:
 	float m_elapsed;
 	float m_shotInterval;
 	bool m_shooting;
-	bool m_alive;
 	sf::Vector2f m_position;
 	sf::Vector2f m_deltaPos;
 	sf::Vector2f m_mousePos;
@@ -44,7 +43,7 @@ private:
 	sf::FloatRect m_hitbox;
 	sf::Vector2f m_rectSize;
 	sf::Vector2f m_hitboxSize;
-	float m_score;
+	float m_energy;
 	float m_collectionRadius;
 	sf::CircleShape m_radius;
 };

@@ -133,9 +133,7 @@ void BulletManager::CheckCollisions() {
 	sf::FloatRect playerHitbox = m_context->m_player->GetHitbox();
 	for (auto itr : m_enemyBullets) {
 		if (itr->GetRect().intersects(playerHitbox)) {
-			m_context->m_effectManager->CreateEffect(
-				EffectType::BigExplosion, m_context->m_player->GetPosition());
-			m_context->m_player->Kill();
+			m_context->m_player->AddEnergy(-45);
 			itr->SetAlive(false);
 		}
 	}

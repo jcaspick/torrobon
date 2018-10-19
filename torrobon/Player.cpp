@@ -8,7 +8,7 @@ Player::Player(Context* context) :
 	m_texture("player"),
 	m_elapsed(0),
 	m_shotInterval(0.03f),
-	m_alive(true),
+	m_energy(100),
 	m_rectSize(18, 32),
 	m_hitboxSize(6, 6)
 {
@@ -28,7 +28,10 @@ Player::Player(Context* context) :
 Player::~Player() {}
 
 void Player::Update(float dt) {
-	if (!m_alive) return;
+	if (m_energy <= 0) return;
+
+	m_energy -= 2 * dt;
+
 	m_elapsed += dt;
 	if (m_elapsed >= m_shotInterval) {
 		if (m_shooting) {
@@ -63,16 +66,16 @@ void Player::Update(float dt) {
 }
 
 void Player::Draw() {
-	if (!m_alive) return;
+	if (m_energy <= 0) return;
 	m_context->m_window->draw(m_sprite);
 	m_context->m_window->draw(m_radius);
 }
 
-void Player::Kill() {
-	m_alive = false;
-}
+void Player::Kill() { m_energy = 0; }
 
-void Player::AddScore(int score) { m_score += score; }
+void Player::AddEnergy(float energy) {
+	m_energy = std::max(0.0f, std::min(m_energy += energy, 100.0f));
+}
 
 void Player::UpdateAABB() {
 	m_rect = sf::FloatRect(
@@ -127,9 +130,9 @@ void Player::EnforceWorldBoundary() {
 sf::Vector2f Player::GetPosition() { return m_position; }
 sf::FloatRect Player::GetRect() { return m_rect; }
 sf::FloatRect Player::GetHitbox() { return m_hitbox; }
-int Player::GetScore() { return m_score; }
-bool Player::IsAlive() { return m_alive; }
+float Player::GetEnergy() { return m_energy; }
 float Player::GetCollectionRadius() { return m_collectionRadius; }
+bool Player::IsAlive() { return m_energy > 0; }
 
 // setters
 void Player::SetPosition(sf::Vector2f pos) { m_position = pos; }
