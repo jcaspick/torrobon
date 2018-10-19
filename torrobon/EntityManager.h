@@ -2,7 +2,6 @@
 #ifndef ENTITY_MANAGER
 #define ENTITY_MANAGER
 #include "Entity.h"
-#include "EnemyBullet.h"
 #include <unordered_map>
 #include <functional>
 
@@ -24,7 +23,6 @@ public:
 	void Update(float dt);
 	void Draw();
 	void Spawn(EntityType type, const sf::Vector2f& pos);
-	void SpawnBullet(sf::Vector2f pos, sf::Vector2f dir, float speed);
 
 	Context* GetContext();
 	std::vector<Entity*>* GetEntities();
@@ -36,7 +34,6 @@ private:
 
 	Context* m_context;
 	std::vector<Entity*> m_entities;
-	std::vector<EnemyBullet*> m_bullets;
 	EntityFactory m_entityFactory;
 };
 

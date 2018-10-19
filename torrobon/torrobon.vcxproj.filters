@@ -73,9 +73,6 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBullet.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Explosion.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
@@ -145,9 +142,6 @@
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBullet.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Context.h">

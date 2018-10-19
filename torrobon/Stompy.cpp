@@ -1,7 +1,6 @@
 #include "Stompy.h"
 #include "Context.h"
 #include "Utilities.h"
-#include "EnemyBullet.h"
 #include <iostream>
 
 Stompy::Stompy(Context* context) :
@@ -71,7 +70,6 @@ void Stompy::Draw() {
 }
 
 void Stompy::OnDeath() {
-	m_context->m_player->AddScore(10);
 	m_context->m_effectManager->CreateEffect(
 		EffectType::BigExplosion, m_position);
 }
