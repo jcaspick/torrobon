@@ -10,7 +10,9 @@ Player::Player(Context* context) :
 	m_shotInterval(0.03f),
 	m_energy(100),
 	m_rectSize(18, 32),
-	m_hitboxSize(6, 6)
+	m_hitboxSize(6, 6),
+	m_super(false),
+	m_energyDrainRate(1.5f)
 {
 	m_sprite.setTexture(*m_context->m_textureHolder->GetTexture(m_texture));
 	m_sprite.setOrigin(
@@ -30,14 +32,13 @@ Player::~Player() {}
 void Player::Update(float dt) {
 	if (m_energy <= 0) return;
 
-	m_energy -= 2 * dt;
+	if (m_energy > 1) m_energy -= m_energyDrainRate * dt;
 
 	m_elapsed += dt;
 	if (m_elapsed >= m_shotInterval) {
 		if (m_shooting) {
-			m_context->m_bulletManager->AimedBullet(
-				true, BulletType::PlayerBasic, m_position,
-				Utils::Vec2Rot(m_mousePos - m_position), 800.0f, 4.0f);
+			if (m_super) ShootSuper();
+			else ShootBasic();
 			m_elapsed = 0;
 		}
 	}
@@ -63,6 +64,18 @@ void Player::Update(float dt) {
 	m_radius.setOutlineColor(sf::Color(255, 255, 255, std::max(0.0f, m_collectionRadius - 50)));
 	EnforceWorldBoundary();
 	UpdateAABB();
+}
+
+void Player::ShootBasic() {
+	m_context->m_bulletManager->AimedBullet(
+		true, BulletType::PlayerBasic, m_position,
+		Utils::Vec2Rot(m_mousePos - m_position), 800.0f, 4.0f);
+}
+
+void Player::ShootSuper() {
+	m_context->m_bulletManager->AimedBullet(
+		true, BulletType::PlayerSuper, m_position,
+		Utils::Vec2Rot(m_mousePos - m_position), 800.0f, 9.0f);
 }
 
 void Player::Draw() {
@@ -109,6 +122,16 @@ void Player::HandleInput() {
 		m_shooting = true;
 		m_mousePos = m_context->m_window->
 			mapPixelToCoords(sf::Mouse::getPosition(*m_context->m_window));
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_energy > 1) {
+		m_super = true;
+		m_energyDrainRate = 30.0f;
+		m_shotInterval = 0.01f;
+	}
+	else {
+		m_super = false;
+		m_energyDrainRate = 1.5f;
+		m_shotInterval = 0.03f;
 	}
 }
 

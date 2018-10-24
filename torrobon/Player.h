@@ -2,6 +2,7 @@
 #ifndef PLAYER
 #define PLAYER
 #include "SpriteSheet.h"
+#include "Repeater.h"
 
 struct Context;
 
@@ -27,6 +28,8 @@ public:
 private:
 	void UpdateAABB();
 	void HandleInput();
+	void ShootBasic();
+	void ShootSuper();
 	void EnforceWorldBoundary();
 
 	Context* m_context;
@@ -46,6 +49,8 @@ private:
 	float m_energy;
 	float m_collectionRadius;
 	sf::CircleShape m_radius;
+	bool m_super;
+	float m_energyDrainRate;
 };
 
 #endif // !PLAYER

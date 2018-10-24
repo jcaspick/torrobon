@@ -88,6 +88,9 @@
     <ClCompile Include="StaticBullet.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Repeater.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -164,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="StaticBullet.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Repeater.h">
+      <Filter>Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
