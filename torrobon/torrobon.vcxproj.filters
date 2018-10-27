@@ -91,6 +91,9 @@
     <ClCompile Include="Repeater.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="FlowField.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -170,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="Repeater.h">
       <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="FlowField.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

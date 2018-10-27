@@ -8,6 +8,7 @@
 #include "EntityManager.h"
 #include "EffectManager.h"
 #include "EntityDebugView.h"
+#include "FlowField.h"
 
 class GS_Game : public GameState {
 	
@@ -40,6 +41,7 @@ private:
 	sf::RectangleShape m_bg;
 	sf::View m_view;
 	sf::RectangleShape m_energyBar;
+	FlowField m_flowField;
 
 	EntityDebugView m_debugView;
 };

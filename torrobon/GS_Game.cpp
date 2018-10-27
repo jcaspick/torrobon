@@ -3,7 +3,7 @@
 
 GS_Game::GS_Game(StateManager* stateMgr) :
 	GameState(stateMgr),
-	m_world({ 1200, 800 }, 8),
+	m_world({ 800, 800 }, 8),
 	m_bulletManager(m_stateMgr->GetContext()),
 	m_entityManager(m_stateMgr->GetContext()),
 	m_effectManager(m_stateMgr->GetContext()),
@@ -11,7 +11,8 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 	m_spawnInterval(1.0f),
 	m_difficultyTimer(0.0f),
 	m_difficultyInterval(10.0f),
-	m_debugView(m_stateMgr->GetContext())
+	m_debugView(m_stateMgr->GetContext()),
+	m_flowField(40, 40, 20)
 {
 	m_stateMgr->GetContext()->m_world = &m_world;
 	m_stateMgr->GetContext()->m_bulletManager = &m_bulletManager;
@@ -98,8 +99,8 @@ void GS_Game::Update(float dt) {
 		if (rand() % 2) spawnY = 90;
 		else spawnY = m_stateMgr->GetContext()->
 			m_world->GetSize().y - 90;
-		m_stateMgr->GetContext()->m_entityManager->Spawn(
-			EntityType::Stompy, { spawnX, spawnY });
+		//m_stateMgr->GetContext()->m_entityManager->Spawn(
+		//	EntityType::Stompy, { spawnX, spawnY });
 	}
 
 	// game over
@@ -109,18 +110,29 @@ void GS_Game::Update(float dt) {
 			m_stateMgr->SetState(StateType::GameOver);
 		}
 	}
+
+	// flowfield
+	std::vector<Entity*> entities = *m_entityManager.GetEntities();
+	std::vector<sf::Vector2f> positions;
+	for (auto itr : entities) {
+		positions.emplace_back(itr->GetPosition());
+	}
+	m_flowField.SetData(positions);
+	m_flowField.SetTarget(m_player->GetPosition());
+	m_flowField.Update();
 }
 
 void GS_Game::Draw() {
 	m_stateMgr->GetContext()->m_window->setView(m_view);
 
-	m_stateMgr->GetContext()->m_window->draw(m_bg);
+	//m_stateMgr->GetContext()->m_window->draw(m_bg);
 	m_player->Draw();
 	m_entityManager.Draw();
 	m_bulletManager.Draw();
 	m_world.Draw(m_stateMgr->GetContext()->m_window);
 	m_effectManager.Draw();
 	//m_debugView.Draw();
+	m_flowField.DebugDraw(m_stateMgr->GetContext()->m_window);
 
 	// switch view to draw UI elements
 	m_stateMgr->GetContext()->m_window->setView(

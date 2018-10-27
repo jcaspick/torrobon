@@ -22,6 +22,16 @@ namespace Utils {
 		if (length != 0) vector /= length;
 		return vector;
 	}
+
+	inline float Lerp(float a, float b, float t) {
+		return (a * (1.0f - t)) + (b * t);
+	}
+
+	inline sf::Vector2f Lerp(sf::Vector2f a, sf::Vector2f b, float t) {
+		return sf::Vector2f(
+			(a.x * (1.0f - t)) + (b.x * t),
+			(a.y * (1.0f - t)) + (b.y * t));
+	}
 }
 
 #endif // !UTILITIES
