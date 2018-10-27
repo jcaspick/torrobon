@@ -4,8 +4,8 @@
 Drone::Drone(Context* context) :
 	Entity(context),
 	m_spriteSheet("config/bot1.cfg"),
-	m_speed(150.0f),
-	m_directionInterval(0.5f)
+	m_speed(75.0f),
+	m_directionInterval(0.25f)
 {
 	m_rectSize = { 32, 40 };
 	m_rectOffset = { 0, 12 };
@@ -46,11 +46,11 @@ void Drone::OnPlayerCollision(sf::FloatRect intersection) {
 }
 
 void Drone::ChooseDirection() {
-	sf::Vector2f goal = m_context->m_player->GetPosition();
-	if (abs(goal.x - m_position.x)
-		> abs(goal.y - m_position.y))
+	sf::Vector2f goal = m_context->m_flowField->QueryFlowField(m_position);
+
+	if (abs(goal.x) > abs(goal.y))
 	{
-		if (goal.x > m_position.x) {
+		if (goal.x > 0) {
 			m_direction = { 1, 0 };
 			m_spriteSheet.SetAnimation("right");
 		}
@@ -60,7 +60,7 @@ void Drone::ChooseDirection() {
 		}
 	}
 	else {
-		if (goal.y > m_position.y) {
+		if (goal.y > 0) {
 			m_direction = { 0, 1 };
 			m_spriteSheet.SetAnimation("down");
 		}

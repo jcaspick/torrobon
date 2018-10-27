@@ -18,6 +18,7 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 	m_stateMgr->GetContext()->m_bulletManager = &m_bulletManager;
 	m_stateMgr->GetContext()->m_entityManager = &m_entityManager;
 	m_stateMgr->GetContext()->m_effectManager = &m_effectManager;
+	m_stateMgr->GetContext()->m_flowField = &m_flowField;
 
 	m_view = m_stateMgr->GetContext()->m_window->getDefaultView();
 
