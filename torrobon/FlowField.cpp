@@ -45,16 +45,16 @@ float FlowField::QueryDensity(sf::Vector2f point) {
 }
 
 sf::Vector2f FlowField::QueryFlowField(sf::Vector2f point) {
-	int a = CoordsToIndex(std::make_pair(
+	int a = CoordsToIndex(sf::Vector2i(
 		(int)floor(point.x / m_cellSize),
 		(int)floor(point.y / m_cellSize)));
-	int b = CoordsToIndex(std::make_pair(
+	int b = CoordsToIndex(sf::Vector2i(
 		(int)ceil(point.x / m_cellSize),
 		(int)floor(point.y / m_cellSize)));
-	int c = CoordsToIndex(std::make_pair(
+	int c = CoordsToIndex(sf::Vector2i(
 		(int)ceil(point.x / m_cellSize),
 		(int)ceil(point.y / m_cellSize)));
-	int d = CoordsToIndex(std::make_pair(
+	int d = CoordsToIndex(sf::Vector2i(
 		(int)floor(point.x / m_cellSize),
 		(int)ceil(point.y / m_cellSize)));
 
@@ -155,14 +155,14 @@ void FlowField::DebugDraw(sf::RenderWindow* window) {
 	for (int i = 0; i < m_gridSize; i++) {
 		Coords coords = IndexToCoords(i);
 		overlay.setFillColor(sf::Color(255, 0, 0, (m_densityField[i] / maxDensity) * 120));
-		overlay.setPosition(sf::Vector2f(coords.first * m_cellSize, coords.second * m_cellSize));
+		overlay.setPosition(sf::Vector2f(coords.x * m_cellSize, coords.y * m_cellSize));
 		window->draw(overlay);
 	}
 
 	for (int i = 0; i < m_gridSize; i++) {
 		Coords coords = IndexToCoords(i);
 		overlay.setFillColor(sf::Color(0, 255, 0, (m_potentialField[i] / highestCost) * 120));
-		overlay.setPosition(sf::Vector2f(coords.first * m_cellSize, coords.second * m_cellSize));
+		overlay.setPosition(sf::Vector2f(coords.x * m_cellSize, coords.y * m_cellSize));
 		window->draw(overlay);
 	}
 
@@ -182,7 +182,7 @@ void FlowField::DebugDraw(sf::RenderWindow* window) {
 }
 
 Coords FlowField::IndexToCoords(int i) {
-	return std::make_pair(i % m_width, i / m_width);
+	return sf::Vector2i(i % m_width, i / m_width);
 }
 
 sf::Vector2f FlowField::IndexToPosition(int i) {
@@ -192,15 +192,15 @@ sf::Vector2f FlowField::IndexToPosition(int i) {
 }
 
 int FlowField::CoordsToIndex(Coords coords) {
-	return coords.second * m_width + coords.first;
+	return coords.y * m_width + coords.x;
 }
 
 sf::Vector2f FlowField::CoordsToPosition(Coords coords) {
-	return sf::Vector2f(coords.first * m_cellSize, coords.second * m_cellSize);
+	return sf::Vector2f(coords.x * m_cellSize, coords.y * m_cellSize);
 }
 
 Coords FlowField::PositionToCoords(sf::Vector2f pos) {
-	return std::make_pair(
+	return sf::Vector2i(
 		(int)ceil((pos.x - m_cellSize * 0.5f) / m_cellSize),
 		(int)ceil((pos.y - m_cellSize * 0.5f) / m_cellSize));
 }
@@ -210,27 +210,27 @@ int FlowField::PositionToIndex(sf::Vector2f pos) {
 }
 
 Coords FlowField::Left(Coords coords) {
-	return std::make_pair(coords.first - 1, coords.second);
+	return sf::Vector2i(coords.x - 1, coords.y);
 }
 
 Coords FlowField::Right(Coords coords) {
-	return std::make_pair(coords.first + 1, coords.second);
+	return sf::Vector2i(coords.x + 1, coords.y);
 }
 
 Coords FlowField::Up(Coords coords) {
-	return std::make_pair(coords.first, coords.second - 1);
+	return sf::Vector2i(coords.x, coords.y - 1);
 }
 
 Coords FlowField::Down(Coords coords) {
-	return std::make_pair(coords.first, coords.second + 1);
+	return sf::Vector2i(coords.x, coords.y + 1);
 }
 
 bool FlowField::IsValid(Coords coords) {
 	return (
-		coords.first >= 0 &&
-		coords.first < m_width &&
-		coords.second >= 0 &&
-		coords.second < m_height);
+		coords.x >= 0 &&
+		coords.x < m_width &&
+		coords.y >= 0 &&
+		coords.y < m_height);
 }
 
 std::vector<Coords> FlowField::GetNeighbors(Coords coords) {

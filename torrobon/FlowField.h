@@ -5,7 +5,7 @@
 
 using FloatField = std::vector<float>;
 using VectorField = std::vector<sf::Vector2f>;
-using Coords = std::pair<int, int>;
+using Coords = sf::Vector2i;
 
 class FlowField {
 
