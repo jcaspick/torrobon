@@ -70,12 +70,14 @@ void Player::ShootBasic() {
 	m_context->m_bulletManager->AimedBullet(
 		true, BulletType::PlayerBasic, m_position,
 		Utils::Vec2Rot(m_mousePos - m_position), 800.0f, 4.0f);
+	m_context->m_soundManager->PlaySound(SoundEffect::Shot1);
 }
 
 void Player::ShootSuper() {
 	m_context->m_bulletManager->AimedBullet(
 		true, BulletType::PlayerSuper, m_position,
 		Utils::Vec2Rot(m_mousePos - m_position), 800.0f, 9.0f);
+	m_context->m_soundManager->PlaySound(SoundEffect::Shot1);
 }
 
 void Player::Draw() {

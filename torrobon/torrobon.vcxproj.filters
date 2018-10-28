@@ -94,6 +94,9 @@
     <ClCompile Include="FlowField.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -175,6 +178,9 @@
       <Filter>Misc</Filter>
     </ClInclude>
     <ClInclude Include="FlowField.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
       <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>

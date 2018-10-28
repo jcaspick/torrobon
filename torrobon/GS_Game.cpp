@@ -19,6 +19,7 @@ GS_Game::GS_Game(StateManager* stateMgr) :
 	m_stateMgr->GetContext()->m_entityManager = &m_entityManager;
 	m_stateMgr->GetContext()->m_effectManager = &m_effectManager;
 	m_stateMgr->GetContext()->m_flowField = &m_flowField;
+	m_stateMgr->GetContext()->m_soundManager = &m_soundManager;
 
 	m_view = m_stateMgr->GetContext()->m_window->getDefaultView();
 
@@ -84,7 +85,7 @@ void GS_Game::Update(float dt) {
 		}
 
 		m_stateMgr->GetContext()->m_entityManager->
-			Spawn(EntityType::Drone, { spawnX, spawnY });
+			Spawn(EntityType::Drone, { 50, 50 });
 	}
 
 	// difficulty increase + stompy spawn
@@ -133,7 +134,7 @@ void GS_Game::Draw() {
 	m_world.Draw(m_stateMgr->GetContext()->m_window);
 	m_effectManager.Draw();
 	//m_debugView.Draw();
-	m_flowField.DebugDraw(m_stateMgr->GetContext()->m_window);
+	//m_flowField.DebugDraw(m_stateMgr->GetContext()->m_window);
 
 	// switch view to draw UI elements
 	m_stateMgr->GetContext()->m_window->setView(

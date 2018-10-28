@@ -6,6 +6,7 @@
 #include "BulletManager.h"
 #include "EntityManager.h"
 #include "EffectManager.h"
+#include "SoundManager.h"
 #include "FlowField.h"
 #include "Player.h"
 
@@ -18,7 +19,8 @@ struct Context {
 		m_entityManager(nullptr),
 		m_effectManager(nullptr),
 		m_player(nullptr),
-		m_flowField(nullptr)
+		m_flowField(nullptr),
+		m_soundManager(nullptr)
 	{}
 
 	sf::RenderWindow* m_window;
@@ -29,6 +31,7 @@ struct Context {
 	EffectManager* m_effectManager;
 	Player* m_player;
 	FlowField* m_flowField;
+	SoundManager* m_soundManager;
 };
 
 #endif // !CONTEXT

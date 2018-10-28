@@ -143,6 +143,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Repeater.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="StaticBullet.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="GS_Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Repeater.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="StaticBullet.h" />

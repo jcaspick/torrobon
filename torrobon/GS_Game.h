@@ -9,6 +9,7 @@
 #include "EffectManager.h"
 #include "EntityDebugView.h"
 #include "FlowField.h"
+#include "SoundManager.h"
 
 class GS_Game : public GameState {
 	
@@ -42,6 +43,7 @@ private:
 	sf::View m_view;
 	sf::RectangleShape m_energyBar;
 	FlowField m_flowField;
+	SoundManager m_soundManager;
 
 	EntityDebugView m_debugView;
 };

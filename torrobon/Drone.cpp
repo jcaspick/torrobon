@@ -1,5 +1,6 @@
 #include "Drone.h"
 #include "Context.h"
+#include "Utilities.h"
 
 Drone::Drone(Context* context) :
 	Entity(context),
@@ -37,6 +38,7 @@ void Drone::OnDeath() {
 	m_context->m_entityManager->Spawn(EntityType::Gem, m_position);
 	m_context->m_effectManager->CreateEffect(
 		EffectType::BigExplosion, m_position);
+	m_context->m_soundManager->RandomExplosion();
 }
 
 void Drone::OnPlayerCollision(sf::FloatRect intersection) {
@@ -47,6 +49,8 @@ void Drone::OnPlayerCollision(sf::FloatRect intersection) {
 
 void Drone::ChooseDirection() {
 	sf::Vector2f goal = m_context->m_flowField->QueryFlowField(m_position);
+	m_direction = Utils::Normalize(goal);
+	return;
 
 	if (abs(goal.x) > abs(goal.y))
 	{
