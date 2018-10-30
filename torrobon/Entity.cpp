@@ -32,6 +32,8 @@ sf::Vector2f Entity::GetCollisionSize() { return m_rectSize; }
 sf::Vector2f Entity::GetCollisionOffset() { return m_rectOffset; }
 sf::FloatRect Entity::GetRect() { return m_rect; }
 float Entity::GetHealth() { return m_health; }
+float Entity::GetFlowFieldWeight() { return m_flowFieldWeight; }
+float Entity::GetFlowFieldSize() { return m_flowFieldSize; }
 unsigned int Entity::GetCollisionMask() { return m_collisionMask; }
 
 void Entity::UpdateRect() {

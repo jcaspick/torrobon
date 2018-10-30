@@ -1,4 +1,5 @@
 #include "FlowField.h"
+#include "Entity.h"
 #include "Utilities.h"
 #include <queue>
 #include <iostream>
@@ -27,7 +28,7 @@ FlowField::FlowField(const int width, const int height, const float cellSize) :
 	m_densityField((width + 1) * (height + 1)),
 	m_potentialField((width + 1) * (height + 1)),
 	m_flowField((width + 1) * (height + 1)),
-	maxDensity(5)
+	maxDensity(10)
 {
 	debugFont.loadFromFile("fonts/arial.ttf");
 }
@@ -71,8 +72,14 @@ void FlowField::BuildDensityField() {
 		float density = 0;
 		sf::Vector2f cellCenter = IndexToPosition(i);
 		for (int j = 0; j < m_data.size(); j++) {
-			sf::Vector2f offset = m_data[j] - cellCenter;
-			float contribution = 1 - (offset.x * offset.x + offset.y * offset.y) / 7500;
+			// ignore units that don't contribute to flowfield
+			if (m_data[j]->GetFlowFieldSize() == 0 ||
+				m_data[j]->GetFlowFieldWeight() == 0) break;
+
+			float unitSize = m_data[j]->GetFlowFieldSize();
+			sf::Vector2f offset = m_data[j]->GetPosition() - cellCenter;
+			float contribution = (1 - (offset.x * offset.x + offset.y * offset.y) 
+				/ (unitSize * unitSize)) * m_data[j]->GetFlowFieldWeight();
 			density += std::fmaxf(0, contribution);
 		}
 		m_densityField[i] = std::fminf(maxDensity, density);
@@ -112,7 +119,7 @@ void FlowField::BuildPotentialField() {
 
 			// calculate the cost of each neighbor
 			float neighborCost = m_potentialField[currentIndex] +
-				m_densityField[neighborIndex] + 1;
+				0.4f * m_densityField[neighborIndex] + 1;
 
 			// update the field if a lower cost was found
 			if (neighborCost < m_potentialField[neighborIndex]) {
@@ -159,12 +166,12 @@ void FlowField::DebugDraw(sf::RenderWindow* window) {
 		window->draw(overlay);
 	}
 
-	for (int i = 0; i < m_gridSize; i++) {
-		Coords coords = IndexToCoords(i);
-		overlay.setFillColor(sf::Color(0, 255, 0, (m_potentialField[i] / highestCost) * 120));
-		overlay.setPosition(sf::Vector2f(coords.x * m_cellSize, coords.y * m_cellSize));
-		window->draw(overlay);
-	}
+	//for (int i = 0; i < m_gridSize; i++) {
+	//	Coords coords = IndexToCoords(i);
+	//	overlay.setFillColor(sf::Color(0, 255, 0, (m_potentialField[i] / highestCost) * 120));
+	//	overlay.setPosition(sf::Vector2f(coords.x * m_cellSize, coords.y * m_cellSize));
+	//	window->draw(overlay);
+	//}
 
 	overlay.setSize({ 2, m_cellSize * 0.5f });
 	overlay.setOrigin({ 1, m_cellSize * 0.5f });
@@ -243,7 +250,7 @@ std::vector<Coords> FlowField::GetNeighbors(Coords coords) {
 }
 
 // setters
-void FlowField::SetData(std::vector<sf::Vector2f> data) {
+void FlowField::SetData(std::vector<Entity*> data) {
 	m_data = data;
 }
 

@@ -36,6 +36,8 @@ public:
 	sf::Vector2f GetCollisionOffset();
 	sf::FloatRect GetRect();
 	float GetHealth();
+	float GetFlowFieldWeight();
+	float GetFlowFieldSize();
 	unsigned int GetCollisionMask();
 
 protected:
@@ -49,6 +51,8 @@ protected:
 	unsigned int m_collisionMask;
 	sf::FloatRect m_rect;
 	float m_health;
+	float m_flowFieldWeight;
+	float m_flowFieldSize;
 };
 
 #endif // !ENTITY

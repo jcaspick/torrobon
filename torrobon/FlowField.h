@@ -3,6 +3,8 @@
 #define FLOWFIELD
 #include <SFML\Graphics.hpp>
 
+class Entity;
+
 using FloatField = std::vector<float>;
 using VectorField = std::vector<sf::Vector2f>;
 using Coords = sf::Vector2i;
@@ -15,7 +17,7 @@ public:
 
 	void Update();
 	void DebugDraw(sf::RenderWindow*);
-	void SetData(std::vector<sf::Vector2f>);
+	void SetData(std::vector<Entity*>);
 	void SetTarget(sf::Vector2f);
 
 	float QueryDensity(sf::Vector2f);
@@ -51,7 +53,7 @@ private:
 	FloatField m_potentialField;
 	VectorField m_flowField;
 
-	std::vector<sf::Vector2f> m_data;
+	std::vector<Entity*> m_data;
 	sf::Vector2f m_target;
 
 	float highestCost;
